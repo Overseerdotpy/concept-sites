@@ -1,6 +1,6 @@
 # Concept sites
 
-**Web and UI design for hardware and deep-tech brands.** Concept sites designed and built end to end, each with a landing page, a product screen and a case study. Static HTML, CSS and JavaScript,automated tests and accessibility checks on every page and a deploy that only runs when they pass.
+**Websites and product UI, designed, built and tested.** Concept sites designed and built end to end, each with a landing page, a product screen and a case study. Static HTML, CSS and JavaScript, automated tests and accessibility checks on every page and a deploy that only runs when they pass.
 
 **Live:** `https://Overseerdotpy.github.io/concept-sites/`
 
