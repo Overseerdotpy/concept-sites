@@ -62,3 +62,23 @@ for (const { path, name, app } of PAGES) {
     });
   });
 }
+
+// Link previews: what a recruiter sees when the link is pasted into LinkedIn, Slack or an email.
+const BASE = 'https://overseerdotpy.github.io/concept-sites/';
+for (const { path, name } of PAGES) {
+  test(`${name}: has a complete link preview whose image exists at 1200x630`, async ({ page }) => {
+    await page.goto(path);
+    const meta = (k) => page.locator(`meta[property="${k}"], meta[name="${k}"]`).first().getAttribute('content');
+    expect((await meta('og:title')).length).toBeGreaterThan(5);
+    expect((await meta('og:description')).length).toBeGreaterThan(50);
+    expect(await meta('twitter:card')).toBe('summary_large_image');
+    expect(await meta('og:url')).toBe(BASE + path.replace(/^\//, ''));
+    const image = await meta('og:image');
+    expect(image.startsWith(BASE + 'assets/og/')).toBe(true);
+    // the same file, served by the local test server
+    const local = '/' + image.slice(BASE.length);
+    const size = await page.evaluate((src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res([i.naturalWidth, i.naturalHeight]); i.onerror = () => rej(new Error('image failed to load: ' + src)); i.src = src; }), local);
+    expect(size).toEqual([1200, 630]);
+    expect((await meta('og:image:alt')).length).toBeGreaterThan(10);
+  });
+}
