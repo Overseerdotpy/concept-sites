@@ -29,6 +29,23 @@ Obsidra and Amberline were designed as standalone pages. To publish them togethe
 | App | Sidebar entries for undesigned screens are `aria-disabled`; the wordmark links to the landing page. | Same as the Obsidra dashboard. |
 | Case study | Top bar links as above. | Dead `#` links. |
 
+## Northvale Expeditions
+Nine existing pages plus one new page, the combined page at `site/northvale/index.html`.
+
+| Page | Change | Why |
+| --- | --- | --- |
+| Combined page (new) | Five tabs, each showing one part in an embedded frame, loaded the first time it is opened. It passes the messages the pages already used: website to booking, booking to trip, and the case study's buttons. Light beam footer (see the design notes). | You asked for the pages merged into one. The pages already contained hooks for a combined file (`window.__NV_HUB`, a comment about switching tabs, and message handlers), so this follows that design. |
+| All pages | A tiny script, before anything else runs, sets `window.__NV_HUB` only when the page sits inside the combined page; a second script turns `data-hub` links into tab switches there. On their own, the pages behave as ordinary pages. | The pages need to know whether they are framed. |
+| All pages | Removed 8 embedded `<metadata>` manifests from inline SVG logos. | Same reason as Amberline: they confuse label checks and are not valid once inlined. |
+| Website | The booking link and the GSAP scripts are local (`../book/`, `site/vendor/gsap/`). | Private link and a CDN request. |
+| Booking | **The "Go to your trip" link is now built after the booking exists.** Back links go to `../site/#trips`. | The link used to be built one line before the booking was created, so on its own the page opened the trip page on a default trip, not the one just booked (a second booking would even have carried the first one). Inside the combined page the message carried the booking, so it worked there. |
+| Booking | `aria-level="2"` on the summary heading. | It was an `h3` straight after the `h1`, which broke the heading outline. Looks identical. |
+| Trip page | The home link goes to `../site/`. | Private link. |
+| Case study | Its four buttons go to the pages in this repo (or switch tabs); the top bar (Ash, Work, About, Contact) goes to the hub, GitHub and email and opens outside the frame. | Private links and dead `#` links. |
+| Brand pages (5) | Metadata only. | None needed. |
+
 ## Design notes (left as designed)
 - **Obsidra dashboard, "Pause".** It pauses the log feed only; the billing clock keeps running, which is correct for a billing product. The button just says "Pause" beside "Stop cluster", so it can read as pausing the meter. "Pause log" would remove the ambiguity.
 - **Lighthouse layout shift.** Lighthouse reports one shift (0.165) on the Amberline app at desktop size and 0.071 on the Obsidra dashboard. A direct layout-shift observer sees none on either page, so I could not reproduce or fix it.
+- **Northvale website weight.** It is one 2.2 MB file with 12 photographs embedded as base64. Moving them to separate compressed files would help mobile loading most.
+- **Northvale light beam footer.** A re-creation of the 21st.dev "Light Beam Footer with Giant Wordmark" (Kedhareswer Naidu, MIT), built from its published description in plain HTML, CSS and JavaScript. The source code sits behind a 21st API key and I did not have it, so no code was copied, and details such as timings and exact gradients are my own. The colours are Northvale's (rust beam on a deep graphite-blue) rather than the component's default midnight navy.

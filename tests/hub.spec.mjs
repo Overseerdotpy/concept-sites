@@ -5,7 +5,7 @@ test('project thumbnails load and keep their 16:10 shape (no stretched or croppe
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     const imgs = page.locator('.card img');
-    await expect(imgs).toHaveCount(3);
+    await expect(imgs).toHaveCount(4);
     for (const img of await imgs.all()) {
       await img.scrollIntoViewIfNeeded();
       await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth > 0), { message: 'thumbnail loaded' }).toBe(true);

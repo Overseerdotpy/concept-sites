@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Northvale Expeditions · Website, booking, trip page, case study and brand · Ash</title>
+<meta name="description" content="Northvale Expeditions, a concept brand for guided alpine trips: the website, booking flow, trip page, case study and brand system in one place. By Ash.">
+<meta name="theme-color" content="#091113">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231B2224'/%3E%3Cpath d='M4 24 L13 9 L18 17 L21 13 L28 24Z' fill='%23D9684D'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ash · Concept sites">
+<meta property="og:title" content="Northvale Expeditions · Website, booking, trip page, case study and brand">
+<meta property="og:description" content="Northvale Expeditions, a concept brand for guided alpine trips: the website, booking flow, trip page, case study and brand system in one place. By Ash.">
+<meta property="og:url" content="https://overseerdotpy.github.io/concept-sites/northvale/">
+<meta property="og:image" content="https://overseerdotpy.github.io/concept-sites/assets/og/northvale.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Northvale Expeditions website: a mountain ridge and the headline for guided alpine trips">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+@property --bx{syntax:'<percentage>';inherits:true;initial-value:-25%}
+:root{
+  --bg:#F5F4F1;--surface:#FFFFFF;--border:#E0E6E7;--fg:#1B2224;--fg-2:#3C474A;--muted:#546063;
+  --primary:#A8432C;--primary-hover:#893A20;--on-primary:#FFFFFF;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;--sans:"Barlow",ui-sans-serif,system-ui,sans-serif;
+  --bar-h:112px;--sub-h:0px;color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#091113;--surface:#1B2224;--border:#283235;--fg:#F5F4F1;--fg-2:#C4CCCE;--muted:#9AA4A6;
+  --primary:#D9684D;--primary-hover:#E8836A;--on-primary:#091113;color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:1.0625rem;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:50;text-decoration:none;font-weight:600}
+.skip:focus{left:12px}
+
+/* ---------- header: project title and the tabs ---------- */
+.bar{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.bar-in{max-width:90rem;margin:0 auto;padding:10px 20px 0;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"back title" "tabs tabs";gap:2px 18px;align-items:center}
+.back{grid-area:back;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--fg-2);padding:8px 10px;margin-left:-10px;border-radius:8px;white-space:nowrap}
+.back:hover{background:var(--bg);color:var(--fg)}
+.title{grid-area:title;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
+.title h1{margin:0;font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.01em;font-size:1.55rem;line-height:1.1}
+.title .by{color:var(--muted);font-size:.9rem}
+.tabs{grid-area:tabs;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 0 10px;margin:0 -4px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;text-decoration:none;font-weight:600;font-size:.98rem;padding:9px 16px;border-radius:999px;border:1.5px solid transparent;color:var(--fg-2);min-height:44px;display:inline-flex;align-items:center}
+.tab:hover{background:var(--bg);color:var(--fg)}
+.tab[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.sub{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 20px;background:var(--bg);border-bottom:1px solid var(--border)}
+.sub::-webkit-scrollbar{display:none}
+.sub[hidden]{display:none}
+.sub button{flex:none;font:inherit;font-weight:600;font-size:.92rem;padding:7px 14px;min-height:40px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--fg-2);cursor:pointer}
+.sub button:hover{border-color:var(--fg-2);color:var(--fg)}
+.sub button[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+
+/* ---------- the views ---------- */
+.panel[hidden]{display:none}
+.panel iframe{display:block;width:100%;border:0;background:var(--bg);height:max(520px,calc(100dvh - var(--bar-h) - var(--sub-h)))}
+.nojs{max-width:40rem;margin:48px auto;padding:0 20px}
+
+/* ---------- footer: light beam with a giant wordmark ----------
+   A slow diagonal shaft of light and a pointer glow sit behind the link columns and pass through the wordmark,
+   which is cropped by the bottom edge. The lit copy of the wordmark uses the same gradients, aligned to the footer. */
+@property --bx{syntax:'<percentage>';inherits:true;initial-value:-25%}
+@property --g{syntax:'<number>';inherits:true;initial-value:0}
+.lb{--accent-1:#F0896A;--accent-2:#F6C16B;--accent-3:#8DB6CF;
+  --beam:linear-gradient(104deg,transparent calc(var(--bx) - 15%),rgba(240,137,106,.24) var(--bx),transparent calc(var(--bx) + 15%));
+  --glow:radial-gradient(30rem circle at var(--px,50%) var(--py,30%),rgba(251,165,138,calc(.2*var(--g))),transparent 70%);
+  --beam-lit:linear-gradient(104deg,transparent calc(var(--bx) - 12%),rgba(255,228,214,.95) var(--bx),transparent calc(var(--bx) + 12%));
+  --glow-lit:radial-gradient(16rem circle at var(--px,50%) var(--py,30%),rgba(255,228,214,calc(.95*var(--g))),rgba(240,137,106,calc(.55*var(--g))) 50%,transparent 78%);
+  background:#091113;color:#C4CCCE;position:relative;overflow:hidden;container-type:inline-size;isolation:isolate;
+  padding:clamp(40px,6vw,88px) 0 0;animation:lb-drift 20s ease-in-out -7s infinite alternate;transition:--g .5s ease}
+@keyframes lb-drift{0%{--bx:-25%}100%{--bx:125%}}
+.lb-fx{position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--glow),var(--beam)}
+.lb-in{position:relative;z-index:2;max-width:90rem;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,1fr));gap:36px 24px}
+.lb-lead{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:1.9rem;line-height:1.06;margin:0 0 12px;color:#F5F4F1}
+.lb-note{margin:0 0 22px;color:#9AA4A6;font-size:.98rem;max-width:26rem}
+.lb-social{display:flex;gap:10px;list-style:none;margin:0;padding:0}
+.lb-social a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#F5F4F1;text-decoration:none;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 18px -8px rgba(0,0,0,.6);
+  -webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);transition:background .2s,border-color .2s,transform .2s}
+.lb-social a:hover{background:rgba(255,255,255,.15);border-color:rgba(251,165,138,.7);transform:translateY(-2px)}
+.lb-social svg{width:20px;height:20px;display:block}
+.lb h2{margin:0 0 12px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.lb h2.c1{color:var(--accent-1)}.lb h2.c2{color:var(--accent-2)}.lb h2.c3{color:var(--accent-3)}
+.lb ul.cols{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.lb-in a.l{color:#F5F4F1;text-decoration:none;display:inline-block;padding:6px 0;min-height:32px}
+.lb-in a.l:hover{color:#FBA58A;text-decoration:underline;text-underline-offset:4px}
+.lb-legal{position:relative;z-index:2;max-width:90rem;margin:clamp(28px,4vw,56px) auto 0;padding:16px 24px 0;display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;
+  border-top:1px solid rgba(255,255,255,.12);color:#9AA4A6;font-size:.9rem}
+.lb-legal p{margin:0}.lb-legal a{color:#C4CCCE;text-underline-offset:3px}.lb-legal a:hover{color:#FBA58A}
+.lb-word{position:relative;z-index:1;display:block;margin:clamp(6px,1.5vw,20px) 0 -.2em;text-align:center;white-space:nowrap;user-select:none;pointer-events:none;
+  font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.8;font-size:23cqw}
+.lb-word span{position:relative;display:inline-block;color:#121C1F}
+.lb-word span::after{content:attr(data-t);position:absolute;left:0;top:0;white-space:nowrap;color:transparent;
+  background:var(--glow-lit),var(--beam-lit);background-repeat:no-repeat;background-size:var(--fw,100%) var(--fh,100%);background-position:var(--ox,0) var(--oy,0);
+  -webkit-background-clip:text;background-clip:text}
+@media (max-width:760px){
+  .lb-in{grid-template-columns:1fr 1fr}.lb-in>:first-child{grid-column:1/-1}
+  .title h1{font-size:1.3rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .lb{animation:none;--bx:58%;transition:none}
+  .lb-social a{transition:none}.lb-social a:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#views">Skip to the page</a>
+
+<header class="bar" id="bar">
+  <div class="bar-in">
+    <a class="back" href="../">&larr; All projects</a>
+    <div class="title"><h1>Northvale Expeditions</h1><span class="by">Concept project by Ash</span></div>
+    <nav class="tabs" role="tablist" aria-label="Northvale sections" id="tabs">
+      <a class="tab" role="tab" id="t-website" href="site/" aria-controls="p-website" aria-selected="true">Website</a>
+      <a class="tab" role="tab" id="t-book" href="book/" aria-controls="p-book" aria-selected="false" tabindex="-1">Book a trip</a>
+      <a class="tab" role="tab" id="t-trip" href="trip/" aria-controls="p-trip" aria-selected="false" tabindex="-1">Your trip</a>
+      <a class="tab" role="tab" id="t-case-study" href="case-study/" aria-controls="p-case-study" aria-selected="false" tabindex="-1">Case study</a>
+      <a class="tab" role="tab" id="t-brand" href="brand/system/" aria-controls="p-brand" aria-selected="false" tabindex="-1">Brand</a>
+    </nav>
+  </div>
+  <div class="sub" id="sub" hidden role="group" aria-label="Brand pages">
+    <button type="button" data-brand="system" aria-pressed="true">Brand system</button>
+    <button type="button" data-brand="logo" aria-pressed="false">Logo</button>
+    <button type="button" data-brand="motion" aria-pressed="false">Logo animation</button>
+    <button type="button" data-brand="type" aria-pressed="false">Type directions</button>
+    <button type="button" data-brand="palette" aria-pressed="false">Palette directions</button>
+  </div>
+</header>
+
+<main id="views">
+  <section class="panel" role="tabpanel" id="p-website" aria-labelledby="t-website"><iframe title="Northvale website" data-src="site/"></iframe></section>
+  <section class="panel" role="tabpanel" id="p-book" aria-labelledby="t-book" hidden><iframe title="Northvale booking flow" data-src="book/"></iframe></section>
+  <section class="panel" role="tabpanel" id="p-trip" aria-labelledby="t-trip" hidden><iframe title="Northvale trip page" data-src="trip/"></iframe></section>
+  <section class="panel" role="tabpanel" id="p-case-study" aria-labelledby="t-case-study" hidden><iframe title="Northvale case study" data-src="case-study/"></iframe></section>
+  <section class="panel" role="tabpanel" id="p-brand" aria-labelledby="t-brand" hidden><iframe title="Northvale brand" data-src="brand/system/"></iframe></section>
+  <noscript><div class="nojs"><p>This page shows each part of the project in a tab. Without JavaScript, open them one at a time: <a href="site/">website</a>, <a href="book/">booking flow</a>, <a href="trip/">trip page</a>, <a href="case-study/">case study</a>, <a href="brand/system/">brand system</a>.</p></div><style>.panel{display:none}</style></noscript>
+</main>
+
+<footer class="lb" id="footer">
+  <div class="lb-fx" aria-hidden="true"></div>
+  <div class="lb-in">
+    <div>
+      <p class="lb-lead">Every trip,<br>planned to the metre.</p>
+      <p class="lb-note">Northvale Expeditions is a concept brand: nothing is sold and no trips run. Designed and built by Ash.</p>
+      <ul class="lb-social" aria-label="Find Ash online">
+        <li><a href="https://github.com/Overseerdotpy" aria-label="Ash on GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/ashlunnd/" aria-label="Ash on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a></li>
+        <li><a href="mailto:ashlundg1@gmail.com" aria-label="Email Ash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7.5 8 6 8-6"/></svg></a></li>
+      </ul>
+    </div>
+    <nav aria-label="Project pages">
+      <h2 class="c1">The project</h2>
+      <ul class="cols">
+        <li><a class="l" href="#website" data-tab="website">Website</a></li>
+        <li><a class="l" href="#book" data-tab="book">Book a trip</a></li>
+        <li><a class="l" href="#trip" data-tab="trip">Your trip</a></li>
+        <li><a class="l" href="#case-study" data-tab="case-study">Case study</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Brand pages">
+      <h2 class="c2">The brand</h2>
+      <ul class="cols">
+        <li><a class="l" href="#brand/system" data-tab="brand" data-brand="system">Brand system</a></li>
+        <li><a class="l" href="#brand/logo" data-tab="brand" data-brand="logo">Logo</a></li>
+        <li><a class="l" href="#brand/type" data-tab="brand" data-brand="type">Type directions</a></li>
+        <li><a class="l" href="#brand/palette" data-tab="brand" data-brand="palette">Palette directions</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Elsewhere">
+      <h2 class="c3">Elsewhere</h2>
+      <ul class="cols">
+        <li><a class="l" href="../">All projects</a></li>
+        <li><a class="l" href="https://github.com/Overseerdotpy/concept-sites">Source for this site</a></li>
+        <li><a class="l" href="mailto:ashlundg1@gmail.com">Email</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="lb-legal">
+    <p>&copy; 2026 Ash. Northvale Expeditions is a fictional company.</p>
+    <p>Built with HTML, CSS and JavaScript. <a href="../">See the other projects</a></p>
+  </div>
+  <div class="lb-word" aria-hidden="true"><span data-t="Northvale">Northvale</span></div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  root.setAttribute("data-nv-shell", "1");           // the pages inside look for this to know they are in the combined page
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var NAMES = { website: "Website", book: "Book a trip", trip: "Your trip", "case-study": "Case study", brand: "Brand" };
+  var SRC = { website: "site/", book: "book/", trip: "trip/", "case-study": "case-study/" };
+  var BRAND = { system: "brand/system/", logo: "brand/logo/", motion: "brand/motion/", type: "brand/type/", palette: "brand/palette/" };
+  var tabs = {}, panels = {}, frames = {};
+  Object.keys(NAMES).forEach(function (id) { tabs[id] = $("#t-" + id); panels[id] = $("#p-" + id); frames[id] = $("iframe", panels[id]); });
+  var sub = $("#sub"), bar = $("#bar"), current = "website", brandKey = "system";
+  var loaded = new WeakSet();
+
+  function sizes() {
+    root.style.setProperty("--bar-h", Math.round(bar.getBoundingClientRect().height - (sub.hidden ? 0 : sub.getBoundingClientRect().height)) + "px");
+    root.style.setProperty("--sub-h", sub.hidden ? "0px" : Math.round(sub.getBoundingClientRect().height) + "px");
+  }
+  if (window.ResizeObserver) new ResizeObserver(sizes).observe(bar); window.addEventListener("resize", sizes);
+
+  function load(id, hash) {                          // load a view the first time it is needed
+    var f = frames[id]; if (f.getAttribute("src")) return f;
+    var src = id === "brand" ? BRAND[brandKey] : SRC[id];
+    f.addEventListener("load", function () { loaded.add(f); }, { once: true });
+    f.setAttribute("src", src + (hash ? "#" + hash : ""));
+    return f;
+  }
+  function whenReady(f, fn) { if (loaded.has(f)) fn(); else f.addEventListener("load", fn, { once: true }); }
+
+  function setBrand(key, push) {
+    if (!BRAND[key]) key = "system"; brandKey = key;
+    sub.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-brand") === key)); });
+    var f = frames.brand;
+    if (f.getAttribute("src") !== BRAND[key]) {      // only reload when the page actually changes
+      loaded.delete(f);
+      f.addEventListener("load", function () { loaded.add(f); }, { once: true });
+      f.setAttribute("src", BRAND[key]);
+    }
+    tabs.brand.setAttribute("href", BRAND[key]);
+    if (push) history.pushState(null, "", "#brand/" + key);
+  }
+
+  function show(id, opts) {
+    opts = opts || {}; if (!NAMES[id]) id = "website";
+    current = id;
+    Object.keys(NAMES).forEach(function (k) {
+      var on = k === id;
+      tabs[k].setAttribute("aria-selected", String(on)); tabs[k].setAttribute("tabindex", on ? "0" : "-1"); panels[k].hidden = !on;
+    });
+    sub.hidden = id !== "brand"; sizes();
+    if (id === "brand") { if (!frames.brand.getAttribute("src")) setBrand(brandKey, false); }
+    else load(id, opts.hash);
+    document.title = NAMES[id] + " · Northvale Expeditions · Ash";
+    if (opts.push) history.pushState(null, "", "#" + (id === "brand" ? "brand/" + brandKey : id));
+    var f = frames[id];                              // scroll-driven pages need to re-measure after being hidden
+    whenReady(f, function () { try { f.contentWindow.dispatchEvent(new Event("resize")); } catch (e) {} });
+    if (opts.focus) tabs[id].focus();
+    return f;
+  }
+
+  function fromHash() {
+    var h = decodeURIComponent(location.hash.slice(1)), parts = h.split("/");
+    if (parts[0] === "brand") { setBrand(BRAND[parts[1]] ? parts[1] : brandKey, false); show("brand"); return; }
+    show(NAMES[parts[0]] ? parts[0] : "website");
+  }
+
+  tabs.website.parentNode.addEventListener("click", function (e) {
+    var a = e.target.closest("a.tab"); if (!a) return; e.preventDefault();
+    show(a.id.slice(2), { push: true });
+  });
+  tabs.website.parentNode.addEventListener("keydown", function (e) {
+    var ids = Object.keys(NAMES), i = ids.indexOf(current), n;
+    if (e.key === "ArrowRight") n = (i + 1) % ids.length; else if (e.key === "ArrowLeft") n = (i + ids.length - 1) % ids.length;
+    else if (e.key === "Home") n = 0; else if (e.key === "End") n = ids.length - 1; else return;
+    e.preventDefault(); show(ids[n], { push: true, focus: true });
+  });
+  sub.addEventListener("click", function (e) { var b = e.target.closest("button[data-brand]"); if (b) setBrand(b.getAttribute("data-brand"), true); });
+  document.addEventListener("click", function (e) {      // footer links switch views without leaving the page
+    var a = e.target.closest("a[data-tab]"); if (!a) return; e.preventDefault();
+    if (a.getAttribute("data-brand")) setBrand(a.getAttribute("data-brand"), false);
+    show(a.getAttribute("data-tab"), { push: true }); window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  window.addEventListener("popstate", fromHash); window.addEventListener("hashchange", fromHash);
+
+  // ---- the protocol the pages already speak ----
+  window.addEventListener("message", function (e) {
+    var d = e.data; if (!d || typeof d !== "object") return;
+    var from = Object.keys(frames).filter(function (k) { return frames[k].contentWindow === e.source; })[0]; if (!from) return;
+    if (d.hub === "booking" && d.book) {                 // from the website: open the booking flow with this trip and date
+      var wasLoaded = !!frames.book.getAttribute("src");
+      var f = show("book", { push: true, hash: encodeURIComponent(d.book.trip + "|" + d.book.date) });
+      if (wasLoaded) whenReady(f, function () { f.contentWindow.postMessage({ book: d.book }, location.origin); });
+    } else if (d.hub === "trip" && d.booking) {           // from the booking flow: open the trip page with this booking
+      var had = !!frames.trip.getAttribute("src");
+      var t = show("trip", { push: true, hash: encodeURIComponent(JSON.stringify(d.booking)) });
+      if (had) whenReady(t, function () { t.contentWindow.postMessage({ booking: d.booking }, location.origin); });
+    } else if (d.hub === "goto" && typeof d.to === "string") {
+      var to = d.to.split("#")[0], anchor = d.to.split("#")[1];
+      if (to.indexOf("brand:") === 0) { setBrand(to.slice(6), false); show("brand", { push: true }); }
+      else { var g = show(to, { push: true, hash: anchor }); if (anchor) whenReady(g, function () { try { g.contentWindow.location.hash = anchor; } catch (x) {} }); }
+      window.scrollTo({ top: 0 });
+    }
+  });
+
+  // ---- footer light: the beam drifts on its own (CSS); a pointer glow follows the cursor ----
+  var foot = $("#footer"), word = $(".lb-word span", foot), still = matchMedia("(prefers-reduced-motion: reduce)");
+  function measure() {       // the lit copy of the wordmark paints the footer's gradients, so it needs the footer's size and its own offset
+    var f = foot.getBoundingClientRect(), w = word.getBoundingClientRect();
+    foot.style.setProperty("--fw", f.width + "px"); foot.style.setProperty("--fh", f.height + "px");
+    foot.style.setProperty("--ox", (f.left - w.left) + "px"); foot.style.setProperty("--oy", (f.top - w.top) + "px");
+  }
+  if (window.ResizeObserver) new ResizeObserver(measure).observe(foot); window.addEventListener("resize", measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  foot.addEventListener("pointermove", function (e) {
+    if (still.matches || e.pointerType === "touch") return;
+    var r = foot.getBoundingClientRect();
+    foot.style.setProperty("--px", (e.clientX - r.left).toFixed(0) + "px"); foot.style.setProperty("--py", (e.clientY - r.top).toFixed(0) + "px"); foot.style.setProperty("--g", "1");
+  });
+  foot.addEventListener("pointerleave", function () { foot.style.setProperty("--g", "0"); });
+  measure();
+
+  sizes(); fromHash();
+})();
+</script>
+</body>
+</html>
