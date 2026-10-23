@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ash · Websites and product UI, designed, built and tested</title>
+<meta name="description" content="Concept sites by Ash, a web and UI designer in Dallas: TRAVL, Obsidra and Amberline. Each is designed, built and tested end to end, with a case study.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ash · Concept sites">
+<meta property="og:title" content="Ash · Websites and product UI, designed, built and tested">
+<meta property="og:description" content="Concept sites by Ash, a web and UI designer in Dallas: TRAVL, Obsidra and Amberline. Each is designed, built and tested end to end, with a case study.">
+<meta property="og:url" content="https://overseerdotpy.github.io/concept-sites/">
+<meta property="og:image" content="https://overseerdotpy.github.io/concept-sites/assets/og/hub-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ash: websites and product UI, designed, built and tested, with screenshots of Amberline, Obsidra and TRAVL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0B1F3A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B1F3A'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --navy:#0B1F3A;--navy-2:#16315A;--ink:#0B1F3A;--muted:#46546A;--line:#D5DDEA;
+  --blue:#1D4ED8;--bg:#FFFFFF;--tint:#EEF2F9;
+  --sans:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;z-index:10}
+.skip:focus{left:12px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0}
+.me{font-weight:700;color:var(--navy);text-decoration:none;font-size:20px;letter-spacing:-.01em}
+header.top nav{display:flex;gap:6px;flex-wrap:wrap}
+header.top nav a{color:var(--navy);text-decoration:none;font-weight:500;font-size:15px;padding:10px 14px;border-radius:999px}
+header.top nav a:hover{background:var(--tint)}
+.hero{padding:clamp(48px,9vw,120px) 0 clamp(48px,7vw,88px);background:linear-gradient(180deg,#fff 0%,#fff 55%,var(--tint) 100%)}
+.kicker{font-size:15px;font-weight:600;color:var(--blue);margin:0 0 18px}
+h1{margin:0;font-size:clamp(36px,6.4vw,84px);line-height:1.02;letter-spacing:-.03em;font-weight:700;max-width:14em;text-wrap:balance}
+.lede{font-size:clamp(18px,1.8vw,22px);color:var(--muted);max-width:34em;margin:28px 0 0}
+section.work{padding:clamp(48px,6vw,80px) 0;background:var(--tint)}
+h2{margin:0 0 36px;font-size:clamp(26px,3vw,38px);letter-spacing:-.02em;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(11,31,58,.45)}
+.card img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:var(--navy);border-bottom:1px solid var(--line)}
+.card .body{padding:26px 26px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
+.card h3{margin:0;font-size:26px;letter-spacing:-.02em;line-height:1.15}
+.card .sub{margin:0;color:var(--navy);font-weight:600;font-size:15px}
+.card p.desc{margin:0;color:var(--muted);font-size:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.tags li.ind{background:var(--navy);color:#fff}
+.tags li{font-size:13px;font-weight:500;color:var(--navy-2);background:var(--tint);border-radius:999px;padding:4px 12px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:6px}
+.links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid var(--navy);color:var(--navy)}
+.links a:hover{background:var(--tint)}
+.links a.primary{background:var(--navy);color:#fff}
+.links a.primary:hover{background:var(--navy-2)}
+.note{margin:40px 0 0;color:var(--muted);font-size:15px;max-width:44em}
+footer{background:var(--navy);color:#DCE6F7;padding:48px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+footer a{color:#fff}
+footer p{margin:0;font-size:15px}
+footer .big{font-size:clamp(28px,4vw,44px);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:10px}
+footer ul{list-style:none;margin:0;padding:0;display:flex;gap:22px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to projects</a>
+
+<div class="wrap">
+  <header class="top">
+    <a class="me" href="./">Ash</a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="https://github.com/Overseerdotpy">GitHub</a>
+      <a href="mailto:ashlundg1@gmail.com">Contact</a>
+    </nav>
+  </header>
+</div>
+
+<main>
+  <section class="hero" aria-labelledby="top-h">
+    <div class="wrap">
+      <p class="kicker">Concept sites by Ash, Dallas</p>
+      <h1 id="top-h">Websites and product UI, designed, built and tested.</h1>
+      <p class="lede">Three concept brands, each designed and built end to end: a landing page, a product screen, and a case study that explains the decisions.</p>
+    </div>
+  </section>
+
+  <section class="work" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <h2 id="work-h">Selected work</h2>
+      <div class="grid">
+
+        <article class="card">
+          <img src="assets/thumbs/travl.jpg" width="1280" height="800" loading="lazy" alt="The TRAVL storefront: a hero panel with a clear mechanical switch beside a row of key facts">
+          <div class="body">
+            <h3>TRAVL</h3>
+            <p class="sub">A 75% mechanical keyboard, built around 4.0 mm of travel</p>
+            <p class="desc">A storefront with a press-and-hold switch you can feel, a product configurator, cart, checkout and accounts. It has 65 automated tests and runs through CI.</p>
+            <ul class="tags"><li class="ind">E-commerce</li><li>Storefront</li><li>Interaction</li><li>Accessibility</li><li>Playwright</li></ul>
+            <div class="links">
+              <a class="primary" href="https://overseerdotpy.github.io/travl-store/">Live site</a>
+              <a href="https://overseerdotpy.github.io/travl-store/case-study/">Case study</a>
+              <a href="https://overseerdotpy.github.io/travl-store/story/">Scroll story</a>
+              <a href="https://github.com/Overseerdotpy/travl-store">Source</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/thumbs/obsidra.jpg" width="1280" height="800" loading="lazy" alt="The Obsidra landing page: a serif headline reading 'Rent H100s by the second' beside a faceted shape and a terminal">
+          <div class="body">
+            <h3>Obsidra</h3>
+            <p class="sub">A GPU cloud that bills by the second</p>
+            <p class="desc">Brand identity, design system and product UI, built to make an invisible pricing model something you can watch happen. A landing page and a live cluster dashboard.</p>
+            <ul class="tags"><li class="ind">Cloud infrastructure</li><li>Brand identity</li><li>Design system</li><li>Landing page</li><li>Dashboard</li></ul>
+            <div class="links">
+              <a class="primary" href="obsidra/">Landing page</a>
+              <a href="obsidra/dashboard/">Dashboard</a>
+              <a href="obsidra/case-study/">Case study</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/thumbs/amberline.jpg" width="1280" height="800" loading="lazy" alt="The Amberline landing page: a headline reading 'Know what's coming, and when' beside an invoice timeline card">
+          <div class="body">
+            <h3>Amberline</h3>
+            <p class="sub">Invoicing and cash flow for freelancers</p>
+            <p class="desc">Brand, logo and motion, a landing page and an app home that shows freelancers their money on its way to them.</p>
+            <ul class="tags"><li class="ind">Fintech</li><li>Brand and logo</li><li>Motion</li><li>Landing page</li><li>App UI</li></ul>
+            <div class="links">
+              <a class="primary" href="amberline/">Landing page</a>
+              <a href="amberline/app/">App home</a>
+              <a href="amberline/logo/">Logo guidelines</a>
+              <a href="amberline/case-study/">Case study</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="note">Every brand here is a fictional company I invented to practice end-to-end product design. Nothing is sold, and no real customer data appears anywhere.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p class="big">Let’s talk.</p>
+      <p>Web and UI designer, based in Dallas, TX.</p>
+    </div>
+    <ul>
+      <li><a href="mailto:ashlundg1@gmail.com">ashlundg1@gmail.com</a></li>
+      <li><a href="https://github.com/Overseerdotpy">GitHub</a></li>
+      <li><a href="https://github.com/Overseerdotpy/concept-sites">Source for this site</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
