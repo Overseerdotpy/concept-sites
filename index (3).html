@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amberline case study · Ash</title>
+<meta name="description" content="Case study: designing Amberline, a concept invoicing and cash-flow app for freelancers.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ash · Concept sites">
+<meta property="og:title" content="Amberline case study · Ash">
+<meta property="og:description" content="Case study: designing Amberline, a concept invoicing and cash-flow app for freelancers.">
+<meta property="og:url" content="https://overseerdotpy.github.io/concept-sites/amberline/case-study/">
+<meta property="og:image" content="https://overseerdotpy.github.io/concept-sites/assets/og/amberline.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Amberline landing page: Know what is coming, and when">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B1F3A'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23fff'/%3E%3C/svg%3E">
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window)document.documentElement.classList.add("motion")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap">
+<style>
+:root{
+  --stone-50:#F6F8F6;--stone-100:#EEF0EC;--stone-200:#DBDFDB;--stone-300:#C0C6C0;--stone-400:#9AA09A;--stone-500:#757D75;--stone-600:#586058;--stone-700:#3F483F;--stone-800:#2A332A;--stone-900:#14201A;--stone-950:#0A120B;
+  --forest-100:#D2F1DF;--forest-200:#ADDFC3;--forest-300:#80C6A1;--forest-600:#286648;--forest-700:#215039;--forest-800:#173A2B;--forest-950:#091A11;
+  --amber-100:#FFE9CF;--amber-300:#FBB961;--amber-400:#E9A23B;--amber-700:#7A4E08;
+  --clay-100:#FFE2DD;--clay-300:#F69C8D;--clay-500:#CA5747;--clay-700:#883327;
+
+  --bg:var(--stone-100);--surface:#FFFFFF;--sunken:var(--stone-50);
+  --border:var(--stone-200);--border-strong:var(--stone-300);
+  --fg:var(--stone-900);--fg-2:var(--stone-700);--fg-muted:var(--stone-600);
+  --primary:var(--forest-800);--primary-hover:var(--forest-700);--on-primary:#FFFFFF;
+  --accent:var(--amber-400);--accent-text:var(--amber-700);
+  --paid:var(--forest-700);--paid-bg:var(--forest-100);
+  --incoming:var(--amber-700);--incoming-bg:var(--amber-100);
+  --overdue:var(--clay-700);--overdue-bg:var(--clay-100);
+  --track:var(--stone-200);--logo-ink:var(--stone-900);
+  --ring:var(--forest-600);
+  --glow-bg:var(--forest-600);--glow-1:rgba(55,130,94,.55);--glow-2:rgba(55,130,94,.32);--glow-3:rgba(128,198,161,.22);
+  --glow-text:0 0 5px rgba(255,255,255,.9),0 0 10px rgba(255,255,255,.55),0 0 20px rgba(255,255,255,.35);
+  --font:"Familjen Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--stone-950);--surface:var(--stone-900);--sunken:var(--stone-950);
+    --border:var(--stone-800);--border-strong:var(--stone-700);
+    --fg:var(--stone-100);--fg-2:var(--stone-300);--fg-muted:var(--stone-400);
+    --primary:var(--forest-300);--primary-hover:var(--forest-200);--on-primary:var(--forest-950);
+    --accent-text:var(--amber-300);
+    --paid:var(--forest-300);--paid-bg:rgba(128,198,161,.14);
+    --incoming:var(--amber-300);--incoming-bg:rgba(251,185,97,.14);
+    --overdue:var(--clay-300);--overdue-bg:rgba(246,156,141,.14);
+    --track:var(--stone-800);--logo-ink:var(--stone-100);
+    --ring:var(--forest-300);
+    --glow-bg:var(--forest-200);--glow-1:rgba(128,198,161,.6);--glow-2:rgba(128,198,161,.35);--glow-3:rgba(128,198,161,.18);--glow-text:none;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:var(--stone-950);--surface:var(--stone-900);--sunken:var(--stone-950);
+  --border:var(--stone-800);--border-strong:var(--stone-700);
+  --fg:var(--stone-100);--fg-2:var(--stone-300);--fg-muted:var(--stone-400);
+  --primary:var(--forest-300);--primary-hover:var(--forest-200);--on-primary:var(--forest-950);
+  --accent-text:var(--amber-300);
+  --paid:var(--forest-300);--paid-bg:rgba(128,198,161,.14);
+  --incoming:var(--amber-300);--incoming-bg:rgba(251,185,97,.14);
+  --overdue:var(--clay-300);--overdue-bg:rgba(246,156,141,.14);
+  --track:var(--stone-800);--logo-ink:var(--stone-100);
+  --ring:var(--forest-300);
+  --glow-bg:var(--forest-200);--glow-1:rgba(128,198,161,.6);--glow-2:rgba(128,198,161,.35);--glow-3:rgba(128,198,161,.18);--glow-text:none;
+  color-scheme:dark;
+}
+
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.6;font-variant-numeric:tabular-nums lining-nums;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:6px}
+h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:24px;padding-right:24px}
+.money{font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.cents{font-size:.6em;font-weight:500;color:var(--fg-muted);letter-spacing:0}
+.ref{font-feature-settings:"zero" 1}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;font:inherit;font-size:16px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:background-color .15s,border-color .15s}
+/* Primary buttons: "tidy-sloth-40" by zjssun on Uiverse.io (MIT), retuned to Amberline green.
+   On hover the button brightens and gets a layered glow plus a soft glow on its label. */
+.btn-primary{background:var(--primary);color:var(--on-primary);border:1px solid var(--primary);transition:background-color .5s ease,border-color .5s ease,box-shadow .5s ease,text-shadow .5s ease}
+.btn-primary:hover,.btn-primary:focus-visible{background:var(--glow-bg);border-color:var(--glow-bg);text-shadow:var(--glow-text);
+  box-shadow:0 0 5px var(--glow-1),0 0 20px var(--glow-1),0 0 50px var(--glow-2),0 0 100px var(--glow-3)}
+.btn-primary:focus-visible{outline-offset:4px}
+.btn-ghost{background:transparent;color:var(--fg);border-color:var(--border-strong)}
+.btn-ghost:hover{background:var(--surface)}
+
+
+.pill{display:inline-flex;font-size:13px;font-weight:600;padding:4px 11px;border-radius:999px;white-space:nowrap}
+.p-paid{background:var(--paid-bg);color:var(--paid)}.p-in{background:var(--incoming-bg);color:var(--incoming)}.p-late{background:var(--overdue-bg);color:var(--overdue)}
+.p-draft{background:var(--stone-200);color:var(--stone-700)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-draft{background:var(--stone-800);color:var(--stone-300)}}
+:root[data-theme="dark"] .p-draft{background:var(--stone-800);color:var(--stone-300)}
+body{font-size:17px;line-height:1.65}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sec{color:var(--fg-2)}.muted{color:var(--fg-muted)}
+.wrap{max-width:1100px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:20px;padding-bottom:20px;font-size:15px}
+.topbar a{color:var(--fg-2)}.topbar a:hover{color:var(--fg)}
+.intro{padding-top:64px;padding-bottom:56px;border-bottom:1px solid var(--border)}
+.kicker{font-size:14px;color:var(--fg-muted);margin-bottom:16px}
+.wm-xl{width:min(100%,760px);height:auto;display:block}
+.wm-xl .ink,.ink{fill:var(--logo-ink)}
+.intro .lede{font-size:clamp(20px,2vw,24px);line-height:1.5;color:var(--fg-2);max-width:32em;margin-top:32px}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px;margin:48px 0 0}
+.meta dt{font-size:13px;color:var(--fg-muted);margin-bottom:4px}
+.meta dd{margin:0;font-size:15px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+section.block{padding-top:104px}
+.head{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px 64px;align-items:start;margin-bottom:36px}
+.head h2{font-size:clamp(30px,3.4vw,44px);line-height:1.08;letter-spacing:-.025em}
+.k2{font-size:14px;color:var(--fg-muted);margin-bottom:10px}
+.prose{display:flex;flex-direction:column;gap:16px;max-width:38em}
+.prose p{color:var(--fg-2)}
+.prose b{color:var(--fg)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:24px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.cap{font-size:14px;color:var(--fg-muted);margin-top:12px}
+.card h3{font-size:19px;margin-bottom:8px}
+.card ul{margin:0;padding-left:18px;color:var(--fg-2);display:flex;flex-direction:column;gap:6px}
+
+/* opposite of Obsidra */
+.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.vs .side{border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.vs .ob{background:#0B0B10;color:#ECEBF3}
+.vs .am{background:#EEF0EC;color:#14201A;border:1px solid #DBDFDB}
+.vs .t{font-size:34px;line-height:1.05}
+.vs .chips{display:flex;gap:6px}.vs .chips i{width:30px;height:30px;border-radius:8px}
+.vs dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.vs dt{opacity:.65}.vs dd{margin:0}
+
+/* palettes / type decisions */
+.pal{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface)}
+.pal.chosen,.spec.chosen{border:2px solid var(--primary)}
+.strip{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;height:84px}
+.pal .b{padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.pal .b p{font-size:15px;color:var(--fg-2)}
+.badge{display:inline-block;align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--paid-bg);color:var(--paid)}
+.motion .decide .pal,.motion .decide .spec{transition:opacity .7s,filter .7s,box-shadow .7s}
+.motion .decide.decided .pal:not(.chosen),.motion .decide.decided .spec:not(.chosen){opacity:.5;filter:saturate(.25)}
+.motion .decide.decided .pal:not(.chosen):hover,.motion .decide.decided .spec:not(.chosen):hover{opacity:1;filter:none}
+.motion .decide.decided .chosen{box-shadow:0 0 0 6px var(--paid-bg)}
+.motion .decide .badge{transform:scale(.5);opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1) .35s,opacity .3s .35s}
+.motion .decide.decided .badge{transform:none;opacity:1}
+.states{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.rule{margin-top:16px;border-left:4px solid var(--accent);background:var(--surface);border-radius:12px;padding:16px 20px;font-size:17px}
+.spec{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.spec .big{font-size:34px;line-height:1.05;font-weight:600;letter-spacing:-.025em}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.nums .col{border:1px solid var(--border);border-radius:14px;padding:16px 18px;background:var(--surface);font-size:20px;line-height:1.7;text-align:right}
+.nums .col span{display:block;text-align:left;font-size:13px;color:var(--fg-muted);margin-bottom:4px}
+
+/* logo process */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.step .art{background:#FFFFFF;display:grid;place-items:center;aspect-ratio:4/3;padding:16px;border-bottom:1px solid var(--border)}
+.step .art img{width:100%;height:100%;object-fit:contain}
+.wm-step{width:100%;height:auto}
+.mono-step{width:52%;height:auto}
+.step .t{padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.step .n{font-size:13px;font-weight:600;color:var(--accent-text)}
+.step h3{font-size:17px}
+.step p{font-size:15px;color:var(--fg-2)}
+
+/* motion */
+.anim{background:var(--surface);border:1px solid var(--border);border-radius:22px;overflow:hidden}
+.anim svg{display:block;width:100%;height:auto}
+.anim .bar{fill:#E9A23B}
+.anim-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-top:1px solid var(--border)}
+.versions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;margin-top:16px}
+.ver{border-top:1px solid var(--border-strong);padding-top:14px}
+.ver h3{font-size:18px}.ver p{font-size:15px;color:var(--fg-2)}
+.ver.chosen h3::after{content:"Chosen";margin-left:10px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--paid-bg);color:var(--paid);vertical-align:3px}
+
+/* bounce moments */
+.moments{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px}
+.moments li{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.moments b{font-size:17px}.moments span{font-size:15px;color:var(--fg-2)}
+.moments i{width:10px;height:28px;border-radius:2px;background:var(--accent);transform-origin:bottom}
+.motion .moments.in i{animation:lb 1.1s linear both;animation-delay:calc(var(--k) * 260ms)}
+@keyframes lb{0%{transform:none}12%{transform:scale(1.1,.88)}34%{transform:translateY(-21%) scale(.94,1.08)}52%{transform:scale(1.08,.9)}66%{transform:translateY(-6%) scale(.98,1.03)}80%{transform:scale(1.03,.97)}100%{transform:none}}
+
+.craft{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px 40px}
+.craft div{display:flex;gap:12px}
+.craft svg{width:20px;height:20px;flex:none;margin-top:4px;color:var(--paid)}
+.craft p{color:var(--fg-2);font-size:16px}.craft b{color:var(--fg)}
+.next{margin-top:120px;background:var(--forest-800);color:#EEF0EC}
+.next .wrap{padding-top:56px;padding-bottom:64px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px}
+.next .nm{font-size:clamp(40px,6vw,72px);line-height:1;font-weight:600;letter-spacing:-.03em}
+.next p{color:#C0D8CB}
+.motion .rise{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.motion .rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.moments i{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="wrap topbar"><a href="../../" style="font-weight:600;color:var(--fg)">Ash</a><nav aria-label="Portfolio" style="display:flex;gap:24px"><a href="../../#work">Work</a><a href="https://github.com/Overseerdotpy">About</a><a href="mailto:ashlundg1@gmail.com">Contact</a></nav></header>
+
+<main>
+  <section class="wrap intro">
+    <p class="kicker">Case study, concept project · 2 of a series</p>
+    <h1 style="margin:0"><span class="sr-only">Amberline</span><svg class="wm-xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5136 922" aria-hidden="true" xmlns:c2pa="http://c2pa.org/manifest">
+  <g transform="translate(3.8 867.2) scale(1 -1)">
+    <path class="ink" d="M276.75 -12.75Q344.25 -12.75 384.5 13.875Q424.75 40.5 444.5 78.0H468.5V0.0H605.0V612.75H456.5V532.5H432.5Q411.25 569.25 373.5 591.0Q335.75 612.75 276.25 612.75Q197.25 612.75 143.75 573.75Q90.25 534.75 63.25 464.625Q36.25 394.5 36.25 300.75Q36.25 209.25 62.875 138.375Q89.5 67.5 142.75 27.375Q196.0 -12.75 276.75 -12.75ZM316.0 95.25Q256.5 95.25 223.125 147.125Q189.75 199.0 189.75 300.0Q189.75 401.0 223.125 452.875Q256.5 504.75 316.0 504.75Q380.5 504.75 418.875 449.5Q457.25 394.25 457.25 300.0Q457.25 206.5 418.875 150.875Q380.5 95.25 316.0 95.25Z M730.0 0V600H866.5V509.75H890.5Q906.75 554.75 944.375 584.875Q982.0 615 1049.75 615.0Q1112.5 615.0 1153.875 587.25Q1195.25 559.5 1216.5 509.75H1240.5Q1258.25 556.25 1297.125 585.625Q1336.0 615 1402.25 615.0Q1499.75 615.0 1546.875 551.625Q1594.0 488.25 1594.0 382V0H1445.5V356.0Q1445.5 421.25 1424.25 457.125Q1403.0 493 1355.5 493.0Q1297.5 493.0 1266.875 444.125Q1236.25 395.25 1236.25 323.75V0.0H1087.75V356.0Q1087.75 421.25 1066.5 457.125Q1045.25 493.0 997.75 493.0Q940.5 493.0 909.5 444.125Q878.5 395.25 878.5 323.75V0.0Z M2038.25 -12.75Q1970.75 -12.75 1930.5 13.875Q1890.25 40.5 1870.5 78.0H1846.5V0.0H1710.0V800H1858.5V532.5H1882.5Q1904.0 569.25 1942.0 591.0Q1980.0 612.75 2038.75 612.75Q2117.75 612.75 2171.25 573.75Q2224.75 534.75 2251.75 464.625Q2278.75 394.5 2278.75 300.75Q2278.75 209.25 2252.125 138.375Q2225.5 67.5 2172.25 27.375Q2119.0 -12.75 2038.25 -12.75ZM1999.0 95.25Q2058.5 95.25 2091.875 147.125Q2125.25 199.0 2125.25 300.0Q2125.25 401.0 2091.875 452.875Q2058.5 504.75 1999.0 504.75Q1934.5 504.75 1896.125 449.5Q1857.75 394.25 1857.75 300.0Q1857.75 206.5 1896.125 150.875Q1934.5 95.25 1999.0 95.25Z M2608.25 -15.0Q2468.75 -15.0 2395.75 70.375Q2322.75 155.75 2322.75 300.75Q2322.75 397.75 2355.5 467.875Q2388.25 538.0 2451.5 576.5Q2514.75 615.0 2606.5 615.0Q2737.75 615.0 2807.5 534.25Q2877.25 453.5 2877.25 297.75V264.5H2467.5Q2472.5 185.5 2508.5 138.75Q2544.5 92.0 2608.5 92.0Q2658.0 92 2688.125 121.0Q2718.25 150.0 2728.75 192.0H2869.75Q2859.75 135.5 2829.0 88.625Q2798.25 41.75 2743.75 13.375Q2689.25 -15.0 2608.25 -15.0ZM2467.75 360.5H2732.5Q2728.75 433.25 2696.5 472.875Q2664.25 512.5 2605.5 512.5Q2546.5 512.5 2511.25 474.125Q2476.0 435.75 2467.75 360.5Z M2957.0 0V600H3092.0V492H3116.0Q3122.0 520.75 3138.125 546.875Q3154.25 573.0 3188.0 589.5Q3221.75 606.0 3279.5 606.0H3308.5V471.0H3268.0Q3181.75 471.0 3143.625 427.125Q3105.5 383.25 3105.5 294.0V0.0Z M3662.0 0V600H3810.5V0.0ZM3736.25 672.75Q3696.25 672.75 3675.375 694.125Q3654.5 715.5 3654.5 750.0Q3654.5 784.5 3675.375 805.875Q3696.25 827.25 3736.25 827.25Q3776.5 827.25 3797.25 805.875Q3818.0 784.5 3818.0 750.0Q3818.0 715.5 3797.25 694.125Q3776.5 672.75 3736.25 672.75Z M3935.0 0V600H4071.5V510.0H4095.5Q4113.25 556.25 4151.875 585.625Q4190.5 615.0 4261.5 615.0Q4362.75 615.0 4412.125 551.625Q4461.5 488.25 4461.5 382.0V0.0H4313.0V356Q4313.0 422 4289.5 457.5Q4266.0 493 4213.75 493.0Q4152.0 493 4117.75 444.5Q4083.5 396.0 4083.5 323.75V0.0Z M4823.25 -15.0Q4683.75 -15.0 4610.75 70.375Q4537.75 155.75 4537.75 300.75Q4537.75 397.75 4570.5 467.875Q4603.25 538.0 4666.5 576.5Q4729.75 615.0 4821.5 615.0Q4952.75 615.0 5022.5 534.25Q5092.25 453.5 5092.25 297.75V264.5H4682.5Q4687.5 185.5 4723.5 138.75Q4759.5 92.0 4823.5 92.0Q4873.0 92 4903.125 121.0Q4933.25 150.0 4943.75 192.0H5084.75Q5074.75 135.5 5044.0 88.625Q5013.25 41.75 4958.75 13.375Q4904.25 -15.0 4823.25 -15.0ZM4682.75 360.5H4947.5Q4943.75 433.25 4911.5 472.875Q4879.25 512.5 4820.5 512.5Q4761.5 512.5 4726.25 474.125Q4691.0 435.75 4682.75 360.5Z"/>
+    <rect fill="#E9A23B" x="3384.0" y="0.0" width="148.0" height="800.0" rx="14.8"/>
+  </g>
+</svg>
+</h1>
+    <p class="lede">Brand, logo and motion, a landing page and product UI for an invoicing app that shows freelancers their money on its way to them.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Brand, UI/UX design, motion and front-end build</dd></div>
+      <div><dt>Deliverables</dt><dd>Color and type system, logo set, logo animation, landing page, dashboard</dd></div>
+      <div><dt>Built with</dt><dd>HTML, CSS, JavaScript, outlined SVG, Tailwind v4 tokens</dd></div>
+      <div><dt>Year</dt><dd>2026</dd></div>
+    </dl>
+    <div class="links">
+      <a class="btn btn-primary" href="../">View the landing page</a>
+      <a class="btn btn-ghost" href="../app/">Open the dashboard</a>
+      <a class="btn btn-ghost" href="../logo/">Logo guidelines</a>
+    </div>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">The brief</p><h2>Freelance income is lumpy. The worry comes from not knowing.</h2></div>
+      <div class="prose">
+        <p>Amberline is a fictional company I invented to practice end-to-end product design. Its users are designers, writers, developers and photographers whose income arrives one invoice at a time, often late, never on a schedule.</p>
+        <p>Most finance tools answer that with a bank's visual language: navy, charts, alerts. But the anxiety isn't about the balance. It's about the money that's <b>somewhere in between</b>: sent, opened, late, maybe coming. So the whole brand is built around one idea: <b>money on its way to you.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Positioning in the series</p><h2>Designed as Obsidra's opposite.</h2></div>
+      <div class="prose"><p>Amberline is the second brand in a portfolio series. The first, Obsidra, is a dark, cool, serif-led GPU cloud. If Amberline shared any of that, the portfolio would read as one style used twice, so every foundational choice deliberately goes the other way.</p></div>
+    </div>
+    <div class="vs">
+      <div class="side ob">
+        <span style="font-family:'Bodoni Moda',serif;font-size:13px;letter-spacing:.16em;font-weight:700">OBSIDRA</span>
+        <span class="t" style="font-family:'Bodoni Moda',serif">Precision, after dark.</span>
+        <div class="chips" aria-hidden="true"><i style="background:#0B0B10;box-shadow:inset 0 0 0 1px #262533"></i><i style="background:#9D7BFF"></i><i style="background:#4BE3A4"></i></div>
+        <dl><dt>Mood</dt><dd>Dark, cool, dramatic</dd><dt>Type</dt><dd>Didone serif, mono numbers</dd><dt>Motion</dt><dd>Machines: terminals, meters</dd></dl>
+      </div>
+      <div class="side am">
+        <span style="font-size:15px;font-weight:700;letter-spacing:-.01em">amberline</span>
+        <span class="t" style="font-weight:600;letter-spacing:-.025em">Calm, in daylight.</span>
+        <div class="chips" aria-hidden="true"><i style="background:#EEF0EC;box-shadow:inset 0 0 0 1px #C0C6C0"></i><i style="background:#173A2B"></i><i style="background:#E9A23B"></i></div>
+        <dl><dt>Mood</dt><dd>Light, warm, steady</dd><dt>Type</dt><dd>One grotesk, tabular figures</dd><dt>Motion</dt><dd>Money settling into place</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Color</p><h2>The problem with amber: it usually means warning.</h2></div>
+      <div class="prose">
+        <p>An amber brand color risks every button reading as caution, which is a bad feeling next to someone's income. I explored three ways to handle that.</p>
+        <p><b>Fossil</b> won: forest green, the color of banknotes and ledgers, does the heavy lifting for actions and paid money. That frees amber for one specific, positive job.</p>
+      </div>
+    </div>
+    <div class="grid3 decide" id="pals">
+      <div class="pal"><div class="strip"><i style="background:#FFFFFF;box-shadow:inset 0 0 0 1px #E7E5E2"></i><i style="background:#1A1714"></i><i style="background:#F2A900"></i><i style="background:#1F7A4D"></i></div><div class="b"><h3 style="font-size:17px">Honey and ink</h3><p>Safe, but amber ends up decorative.</p></div></div>
+      <div class="pal"><div class="strip"><i style="background:#15110C"></i><i style="background:#1F1912"></i><i style="background:#FFB547"></i><i style="background:#7BD389"></i></div><div class="b"><h3 style="font-size:17px">Resin</h3><p>Rich, but dark like Obsidra, and amber buttons feel cautionary.</p></div></div>
+      <div class="pal chosen"><div class="strip"><i style="background:#EEF0EC"></i><i style="background:#173A2B"></i><i style="background:#E9A23B"></i><i style="background:#7A4E08"></i></div><div class="b"><span class="badge">Chosen</span><h3 style="font-size:17px">Fossil</h3><p>Green for action, amber for money in motion.</p></div></div>
+    </div>
+    <div class="states" aria-label="The four money states"><span class="pill p-paid">Paid</span><span class="pill p-in">On its way</span><span class="pill p-late">Overdue</span><span class="pill p-draft">Draft</span></div>
+    <p class="rule"><b>The rule:</b> amber never means warning. It means money on its way to you. Anything cautionary uses clay, so amber keeps that single, hopeful meaning everywhere it appears.</p>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Typography</p><h2>Chosen for numbers first.</h2></div>
+      <div class="prose">
+        <p>In a money app, amounts in a column have to line up. Before shortlisting fonts, I opened each candidate's font file and checked for tabular figures, digits that are all the same width. Several popular choices failed.</p>
+        <p><b>Familjen Grotesk</b> passed with a bonus: its digits are tabular <b>by default</b>, so alignment can't be forgotten. Obsidra chose type for character; Amberline chose it for numbers.</p>
+      </div>
+    </div>
+    <div class="grid2 decide" id="types">
+      <div class="spec"><span class="muted" style="font-size:13px">Studio · Bricolage + Schibsted</span><span class="big" style="font-family:'Bricolage Grotesque';font-variation-settings:'opsz' 96,'wdth' 85;font-weight:700">Know what's coming.</span><span class="sec" style="font-size:15px">More personality, but a common pick lately, and two families to manage.</span></div>
+      <div class="spec chosen"><span class="muted" style="font-size:13px">Ledger · Familjen Grotesk <span class="badge" style="margin-left:6px">Chosen</span></span><span class="big">Know what's coming.</span><span class="sec" style="font-size:15px">Warm, human, and every digit the same width.</span></div>
+    </div>
+    <div class="nums" style="margin-top:16px" aria-hidden="true">
+      <div class="col" style="font-variant-numeric:proportional-nums"><span>Proportional digits</span>$1,111.11<br>$8,040.00<br>$11,700.50</div>
+      <div class="col" style="font-variant-numeric:tabular-nums"><span>Tabular digits</span>$1,111.11<br>$8,040.00<br>$11,700.50</div>
+    </div>
+    <p class="cap">Same font, same amounts. Only the right column lines up.</p>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Logo</p><h2>The l is the line.</h2></div>
+      <div class="prose">
+        <p>The "l" in "line" is set in solid amber: the line money travels along to reach you. It took four rounds to get right, and two of them were mistakes worth keeping.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="art"><svg class="wm-step" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5136 922" role="img" aria-label="First version: double-story a, with an amber l noticeably thicker than the other letters" xmlns:c2pa="http://c2pa.org/manifest">
+  <g transform="translate(3.2 867.2) scale(1 -1)">
+    <path fill="#14201A" d="M280.25 -12.75Q198.0 -12.75 144.0 27.375Q90.0 67.5 63.375 138.375Q36.75 209.25 36.75 300.75Q36.75 394.5 63.75 464.625Q90.75 534.75 144.875 573.75Q199.0 612.75 280.0 612.75Q344.25 612.75 384.75 587.25Q425.25 561.75 445 522H469V600H605.5V0.0H469V78H445Q425.25 40.5 385.0 13.875Q344.75 -12.75 280.25 -12.75ZM316.5 95.25Q381.0 95.25 419.375 150.875Q457.75 206.5 457.75 300.0Q457.75 394.25 419.375 449.5Q381.0 504.75 316.5 504.75Q257.0 504.75 223.625 452.875Q190.25 401.0 190.25 300.0Q190.25 199.0 223.625 147.125Q257.0 95.25 316.5 95.25Z M730.0 0V600H866.5V509.75H890.5Q906.75 554.75 944.375 584.875Q982.0 615 1049.75 615.0Q1112.5 615.0 1153.875 587.25Q1195.25 559.5 1216.5 509.75H1240.5Q1258.25 556.25 1297.125 585.625Q1336.0 615 1402.25 615.0Q1499.75 615.0 1546.875 551.625Q1594.0 488.25 1594.0 382V0H1445.5V356.0Q1445.5 421.25 1424.25 457.125Q1403.0 493 1355.5 493.0Q1297.5 493.0 1266.875 444.125Q1236.25 395.25 1236.25 323.75V0.0H1087.75V356.0Q1087.75 421.25 1066.5 457.125Q1045.25 493.0 997.75 493.0Q940.5 493.0 909.5 444.125Q878.5 395.25 878.5 323.75V0.0Z M2038.25 -12.75Q1970.75 -12.75 1930.5 13.875Q1890.25 40.5 1870.5 78.0H1846.5V0.0H1710.0V800H1858.5V532.5H1882.5Q1904.0 569.25 1942.0 591.0Q1980.0 612.75 2038.75 612.75Q2117.75 612.75 2171.25 573.75Q2224.75 534.75 2251.75 464.625Q2278.75 394.5 2278.75 300.75Q2278.75 209.25 2252.125 138.375Q2225.5 67.5 2172.25 27.375Q2119.0 -12.75 2038.25 -12.75ZM1999.0 95.25Q2058.5 95.25 2091.875 147.125Q2125.25 199.0 2125.25 300.0Q2125.25 401.0 2091.875 452.875Q2058.5 504.75 1999.0 504.75Q1934.5 504.75 1896.125 449.5Q1857.75 394.25 1857.75 300.0Q1857.75 206.5 1896.125 150.875Q1934.5 95.25 1999.0 95.25Z M2608.25 -15.0Q2468.75 -15.0 2395.75 70.375Q2322.75 155.75 2322.75 300.75Q2322.75 397.75 2355.5 467.875Q2388.25 538.0 2451.5 576.5Q2514.75 615.0 2606.5 615.0Q2737.75 615.0 2807.5 534.25Q2877.25 453.5 2877.25 297.75V264.5H2467.5Q2472.5 185.5 2508.5 138.75Q2544.5 92.0 2608.5 92.0Q2658.0 92 2688.125 121.0Q2718.25 150.0 2728.75 192.0H2869.75Q2859.75 135.5 2829.0 88.625Q2798.25 41.75 2743.75 13.375Q2689.25 -15.0 2608.25 -15.0ZM2467.75 360.5H2732.5Q2728.75 433.25 2696.5 472.875Q2664.25 512.5 2605.5 512.5Q2546.5 512.5 2511.25 474.125Q2476.0 435.75 2467.75 360.5Z M2957.0 0V600H3092.0V492H3116.0Q3122.0 520.75 3138.125 546.875Q3154.25 573.0 3188.0 589.5Q3221.75 606.0 3279.5 606.0H3308.5V471.0H3268.0Q3181.75 471.0 3143.625 427.125Q3105.5 383.25 3105.5 294.0V0.0Z M3662.0 0V600H3810.5V0.0ZM3736.25 672.75Q3696.25 672.75 3675.375 694.125Q3654.5 715.5 3654.5 750.0Q3654.5 784.5 3675.375 805.875Q3696.25 827.25 3736.25 827.25Q3776.5 827.25 3797.25 805.875Q3818.0 784.5 3818.0 750.0Q3818.0 715.5 3797.25 694.125Q3776.5 672.75 3736.25 672.75Z M3935.0 0V600H4071.5V510.0H4095.5Q4113.25 556.25 4151.875 585.625Q4190.5 615.0 4261.5 615.0Q4362.75 615.0 4412.125 551.625Q4461.5 488.25 4461.5 382.0V0.0H4313.0V356Q4313.0 422 4289.5 457.5Q4266.0 493 4213.75 493.0Q4152.0 493 4117.75 444.5Q4083.5 396.0 4083.5 323.75V0.0Z M4823.25 -15.0Q4683.75 -15.0 4610.75 70.375Q4537.75 155.75 4537.75 300.75Q4537.75 397.75 4570.5 467.875Q4603.25 538.0 4666.5 576.5Q4729.75 615.0 4821.5 615.0Q4952.75 615.0 5022.5 534.25Q5092.25 453.5 5092.25 297.75V264.5H4682.5Q4687.5 185.5 4723.5 138.75Q4759.5 92.0 4823.5 92.0Q4873.0 92 4903.125 121.0Q4933.25 150.0 4943.75 192.0H5084.75Q5074.75 135.5 5044.0 88.625Q5013.25 41.75 4958.75 13.375Q4904.25 -15.0 4823.25 -15.0ZM4682.75 360.5H4947.5Q4943.75 433.25 4911.5 472.875Q4879.25 512.5 4820.5 512.5Q4761.5 512.5 4726.25 474.125Q4691.0 435.75 4682.75 360.5Z"/>
+    <rect fill="#E9A23B" x="3383.2" y="0.0" width="210.0" height="800.0" rx="25.2"/>
+  </g>
+</svg>
+</div><div class="t"><span class="n">01 · First build</span><h3>Too heavy, wrong "a"</h3><p>I sized the amber bar from the l's outer bounds, which include a small foot. It came out 40% thicker than every other stroke.</p></div></div>
+      <div class="step"><div class="art"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCAFoAWgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6VpKWkqAFozRSUALSUtFACUtJRQAuaM0lFAC0lFFABRRRQAZpaSloAQ0UUUAFFFFAC5opKWgApM0UdKAFopKKAFoopKACloxSUALSUUUALRSUUALRSUUALRRRQAUUlFAC0UCkNACiikooAWiiigBKKKKACiiigBaTFFLQAUUlFAC0UlFAC4pKKKACijFFAC0lFFABRRRQAUUUUAFFFFABRRRQAUUUUAFLSUUALSUUtACUUUUAFFFFAC0lFFAC5o60lFABSmkooAKKKXFACUUUUAFFFFABRRRQAUUUUAAooooAKKKKAFpKKKACiijFABRRRQAUUUUAFHaiigApTRSUAFLSUUALikpaSgAooooAKKKKACiiigAooooAKKKKACiiigAooxRQAYooooAKKKKACiiigAooooAKXtSUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUtACUUUUAFLSUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFLQAlLSUUAFFGaKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKWkooAKKKKACiiigAopaKAEoooxQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUALSUUUAFFLiigBKKKKADNFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUtJQAUUUUAFFFFABRRRQAUVBdXtrYqrXVxFCG4G9sZ+lVv8AhINJ/wCgjbf991lKvSg7Skk/VGkaU5K8Yt/I0KKz/wDhINJ/6CNt/wB90f8ACQaTkD+0bbJ/26n61R/nX3ofsKv8r+5mhRSKyuoZSGBGQQcgilrcyCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiilFACUUGigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDhPHTH+14xk4EK49uTXN5rovHX/ACGU/wCuC/zNc5X51mv+91PU+0wH+7w9BcntRnBzQKO9eedh6P4QZm8P2xYkkFx+G41sVjeEP+Rftvq//oRrZr9KwH+7U/8ACvyPh8X/AB5+r/MKKKK6znCiiigAooooAKO9LRQAhopaSgBaSil6UAJRRRQAUUUUAFFFFAAKWkooADRRQKAFpKWkoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDgvHQ/4nKf8AXBf5mudFdF46/wCQyn/XBf5mudr86zT/AHup6n2mA/3eHoFFFFeedh6N4Q/5F62+r/8AoRrZrH8If8i/bfV//QjWxX6VgP8Adqf+FfkfD4v+PP1f5hRRRXWc4UUUUAFFLRQAUlFLQAdqSiigAooooAKKUUUAJRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRVe/1Cy0q1a71C7t7O3XrLcSLGg/FiBQBYorzjWP2hfhzpDMg1x9Qdf4bC3eUf99YC/rXNXP7V/hGMkW+i67P7kRJ/NjTFzI9sorwxP2tP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WvIPFP7LXhbVWefQb270SVuREf38GfYMQwH0Y0zJw7HynRXsmp/sr+NrNibG70bUU7bZ2hY/g64/WsR/2dfiUrEDQYmx3W9hIP8A49QTys82xRXq9j+zL8Q7tl8620uyB6me9U4/BA1d74a/ZMs4ZFl8S+IZLpRybbT4/LU+xkfJ/JRQPlZ8+aB4d1bxRqkWmaLYT313KeI4h90f3mPRVHcnArpPih8NZfhjd6Tp9zerd3l3Zfargxj93G/mMuxe5AA6nqfSvsnwx4R0Lwbp/wDZ+g6Zb2EB+/5Yy8h9XY/Mx+pry/43fBfxB8S/EdhqWk3umW8FtZ/Z3W6dwxbzGbI2qeMGi43DQ4b4I/8AInS/9fsv/oKV6BVX4cfBvxR4R0250/ULrSJYnlM0bwSyFgSACCCg44BzXXjwHqX/AD3tP++m/wAK+HzHLcTPEznCDabPrsBjqEMPCMpWaRzVFdL/AMIFqP8Az8Wn/fTf4Uf8IFqP/PxaD8W/wrh/srF/8+2df9oYb+dHReD/APkXrb6v/wChGtmqekacNK06GzD7zGDlsYyScmrlfe4SnKnQhCW6SX4HyOJmp1ZSjs2woooroMQooooAKOlFFABRRRQAUUUtACUUUUAFFFFABRS0lACmkoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopaKACkoooAKKKKAFpKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKWkoAKKKKACiiigAooooAKKKKACilpOlABRS0lAC0UlFAC0UlFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFGKKACiiigAooooAKKKKACilpKACiil7UAJRRRQAUUUUAFFFFABRRRQAYopaKAEopaKAEoopaAEooooAKKKKACiiigAooooAKKKKACiiigAopcUlABRRRQACiiigAooxRQAUCiigBaSiigAooooAKKM0UAFFFFABRRRQAUUtJQAUUUUAFFFFAC0lFFACmkoooAWiiigBKKKKACiiigAooooAKKKKACiiigAooooAKWkooAWkoooAWkoooAWk6UtJQAZooooAKKKKACiiigAooooAKKKKACiiigApcUUlAC0lFFABRRRQAUtJRQAUUUUAFLSUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUtACUUUUAFFFLQAlFFFABRRRQAUUtFACUUUUAFFFFABRRRQAUUUUAFGaKKAClpKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApaKKAEooooAKWiigApKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="AI concept where the amber stem rises above the a, so the mark reads as the letter d"></div><div class="t"><span class="n">02 · Concept in Leonardo</span><h3>It reads as a "d"</h3><p>Fusing a tall stem onto an "a" makes the exact shape of a "d". The fix was keeping the stem at the a's height.</p></div></div>
+      <div class="step"><div class="art"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCAFoAWgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6oooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKpazrem+HdNn1PVr2Gysrdd0k0zYVR/U+gHJ7UAXelY3iPxl4e8I2/n67rNlpyEZAnlAZv8AdXqfwFfNvxJ/ak1XVnl0/wAGI+l2XKm/lUG4lHqoPEY+uW+leF3l7dahdSXd5czXVzKcvNM5d2Pux5NK5LkfW2t/tXeB9P3LptvqurOOjRwiJD+LkH9K5S6/bFbP+ieDePWa/wCf0Svm6igV2fR0P7YkwYef4NRh38vUCD+sddPon7WXg++ZU1TTdW0xm6vsWdF+pU5/8dr5KpaAuz9B/DHjrwz4zhMuga1Z6gFGWSJ/3if7yHDD8RW7n0r84bO9utOuY7uyuZrW5iOUmhco6H1DDkV9F/B/9peWS5t9A8cTK3mERw6uQFw3QCYDjn++Me470DTPetV8WabpF0bW4MzSqASETOM1T/4WBo/pdf8Afr/69cp42I/4SG4IOcqh/wDHRWEK+NxmfYmlXnTjaybW3b5n1OGyihUpRnK92kz0f/hYGjjtdf8Afr/69aWj+I7HXGkS1aQNGASrpg49a8mxXW/Dk51G79fJX/0KtcuzvE18RClO1n5eRnjcqo0qMqkL3R6BRRRX1x84FFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUA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eM7QcZwa+gaKY7Hzb8KNE1W08E2ltc6ZqEE0csoaOW2dGXLkjgj0Irr/AOy7/wD58br/AL9N/hXsdFfOYjh2FarKpztXd9u57dHOZ0qcafLsrHjn9lX/APz43X/fpv8ACur8AWF1b3l1JPbSxIY1UF0K5Oc967iirweQQw9aNZTbt5E4nN5VqbpuNrhRRRX0B44UUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//2Q==" alt="Revised AI concept: a round single-story a whose stem is an amber bar the same height as the letter"></div><div class="t"><span class="n">03 · Revised concept</span><h3>The monogram</h3><p>A round single-story "a" with an amber stem. Right idea, but AI images blur when scaled and can't be edited.</p></div></div>
+      <div class="step"><div class="art"><svg class="mono-step" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 689 746" role="img" aria-label="Final vector monogram: single-story a with an amber stem" xmlns:c2pa="http://c2pa.org/manifest">
+  <g transform="translate(24.0 673.0) scale(1 -1)">
+    <path fill="#14201A" d="M277.0 -13.0Q344.0 -13.0 384.5 14.0Q425.0 41.0 445.0 78.0H469.0V0.0H605.0V613.0H457.0V533.0H433.0Q411.0 569.0 373.5 591.0Q336.0 613.0 276.0 613.0Q197.0 613.0 143.5 574.0Q90.0 535.0 63.0 465.0Q36.0 395.0 36.0 301.0Q36.0 209.0 63.0 138.5Q90.0 68.0 143.0 27.5Q196.0 -13.0 277.0 -13.0ZM316.0 95.0Q257.0 95.0 223.5 147.0Q190.0 199.0 190.0 300.0Q190.0 401.0 223.5 453.0Q257.0 505.0 316.0 505.0Q381.0 505.0 419.0 449.5Q457.0 394.0 457.0 300.0Q457.0 207.0 419.0 151.0Q381.0 95.0 316.0 95.0Z"/>
+    <rect fill="#E9A23B" x="457" y="0" width="149" height="613.0"/>
+  </g>
+</svg>
+</div><div class="t"><span class="n">04 · Vector rebuild</span><h3>Cut from the real letters</h3><p>Familjen has no single-story "a", so I cut one from its "d". Its stem matches the l's exactly, which made the animation possible.</p></div></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card" style="background:#FFFFFF"><div style="display:grid;place-items:center;padding:12px 0"><svg class="wm-step" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5136 922" role="img" aria-label="Final version: single-story a, with an amber l exactly as thick as the other strokes" xmlns:c2pa="http://c2pa.org/manifest">
+  <g transform="translate(3.8 867.2) scale(1 -1)">
+    <path fill="#14201A" d="M276.75 -12.75Q344.25 -12.75 384.5 13.875Q424.75 40.5 444.5 78.0H468.5V0.0H605.0V612.75H456.5V532.5H432.5Q411.25 569.25 373.5 591.0Q335.75 612.75 276.25 612.75Q197.25 612.75 143.75 573.75Q90.25 534.75 63.25 464.625Q36.25 394.5 36.25 300.75Q36.25 209.25 62.875 138.375Q89.5 67.5 142.75 27.375Q196.0 -12.75 276.75 -12.75ZM316.0 95.25Q256.5 95.25 223.125 147.125Q189.75 199.0 189.75 300.0Q189.75 401.0 223.125 452.875Q256.5 504.75 316.0 504.75Q380.5 504.75 418.875 449.5Q457.25 394.25 457.25 300.0Q457.25 206.5 418.875 150.875Q380.5 95.25 316.0 95.25Z M730.0 0V600H866.5V509.75H890.5Q906.75 554.75 944.375 584.875Q982.0 615 1049.75 615.0Q1112.5 615.0 1153.875 587.25Q1195.25 559.5 1216.5 509.75H1240.5Q1258.25 556.25 1297.125 585.625Q1336.0 615 1402.25 615.0Q1499.75 615.0 1546.875 551.625Q1594.0 488.25 1594.0 382V0H1445.5V356.0Q1445.5 421.25 1424.25 457.125Q1403.0 493 1355.5 493.0Q1297.5 493.0 1266.875 444.125Q1236.25 395.25 1236.25 323.75V0.0H1087.75V356.0Q1087.75 421.25 1066.5 457.125Q1045.25 493.0 997.75 493.0Q940.5 493.0 909.5 444.125Q878.5 395.25 878.5 323.75V0.0Z M2038.25 -12.75Q1970.75 -12.75 1930.5 13.875Q1890.25 40.5 1870.5 78.0H1846.5V0.0H1710.0V800H1858.5V532.5H1882.5Q1904.0 569.25 1942.0 591.0Q1980.0 612.75 2038.75 612.75Q2117.75 612.75 2171.25 573.75Q2224.75 534.75 2251.75 464.625Q2278.75 394.5 2278.75 300.75Q2278.75 209.25 2252.125 138.375Q2225.5 67.5 2172.25 27.375Q2119.0 -12.75 2038.25 -12.75ZM1999.0 95.25Q2058.5 95.25 2091.875 147.125Q2125.25 199.0 2125.25 300.0Q2125.25 401.0 2091.875 452.875Q2058.5 504.75 1999.0 504.75Q1934.5 504.75 1896.125 449.5Q1857.75 394.25 1857.75 300.0Q1857.75 206.5 1896.125 150.875Q1934.5 95.25 1999.0 95.25Z M2608.25 -15.0Q2468.75 -15.0 2395.75 70.375Q2322.75 155.75 2322.75 300.75Q2322.75 397.75 2355.5 467.875Q2388.25 538.0 2451.5 576.5Q2514.75 615.0 2606.5 615.0Q2737.75 615.0 2807.5 534.25Q2877.25 453.5 2877.25 297.75V264.5H2467.5Q2472.5 185.5 2508.5 138.75Q2544.5 92.0 2608.5 92.0Q2658.0 92 2688.125 121.0Q2718.25 150.0 2728.75 192.0H2869.75Q2859.75 135.5 2829.0 88.625Q2798.25 41.75 2743.75 13.375Q2689.25 -15.0 2608.25 -15.0ZM2467.75 360.5H2732.5Q2728.75 433.25 2696.5 472.875Q2664.25 512.5 2605.5 512.5Q2546.5 512.5 2511.25 474.125Q2476.0 435.75 2467.75 360.5Z M2957.0 0V600H3092.0V492H3116.0Q3122.0 520.75 3138.125 546.875Q3154.25 573.0 3188.0 589.5Q3221.75 606.0 3279.5 606.0H3308.5V471.0H3268.0Q3181.75 471.0 3143.625 427.125Q3105.5 383.25 3105.5 294.0V0.0Z M3662.0 0V600H3810.5V0.0ZM3736.25 672.75Q3696.25 672.75 3675.375 694.125Q3654.5 715.5 3654.5 750.0Q3654.5 784.5 3675.375 805.875Q3696.25 827.25 3736.25 827.25Q3776.5 827.25 3797.25 805.875Q3818.0 784.5 3818.0 750.0Q3818.0 715.5 3797.25 694.125Q3776.5 672.75 3736.25 672.75Z M3935.0 0V600H4071.5V510.0H4095.5Q4113.25 556.25 4151.875 585.625Q4190.5 615.0 4261.5 615.0Q4362.75 615.0 4412.125 551.625Q4461.5 488.25 4461.5 382.0V0.0H4313.0V356Q4313.0 422 4289.5 457.5Q4266.0 493 4213.75 493.0Q4152.0 493 4117.75 444.5Q4083.5 396.0 4083.5 323.75V0.0Z M4823.25 -15.0Q4683.75 -15.0 4610.75 70.375Q4537.75 155.75 4537.75 300.75Q4537.75 397.75 4570.5 467.875Q4603.25 538.0 4666.5 576.5Q4729.75 615.0 4821.5 615.0Q4952.75 615.0 5022.5 534.25Q5092.25 453.5 5092.25 297.75V264.5H4682.5Q4687.5 185.5 4723.5 138.75Q4759.5 92.0 4823.5 92.0Q4873.0 92 4903.125 121.0Q4933.25 150.0 4943.75 192.0H5084.75Q5074.75 135.5 5044.0 88.625Q5013.25 41.75 4958.75 13.375Q4904.25 -15.0 4823.25 -15.0ZM4682.75 360.5H4947.5Q4943.75 433.25 4911.5 472.875Q4879.25 512.5 4820.5 512.5Q4761.5 512.5 4726.25 474.125Q4691.0 435.75 4682.75 360.5Z"/>
+    <rect fill="#E9A23B" x="3384.0" y="0.0" width="148.0" height="800.0" rx="14.8"/>
+  </g>
+</svg>
+</div><p class="cap" style="margin-top:4px">Final wordmark: every stroke the same weight, the "a" matching the monogram.</p></div>
+      <div class="card" style="background:#FFFFFF"><div style="display:grid;place-items:center;padding:12px 0"><svg class="wm-step" style="opacity:.9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5136 922" role="img" aria-label="First version: double-story a, with an amber l noticeably thicker than the other letters" xmlns:c2pa="http://c2pa.org/manifest">
+  <g transform="translate(3.2 867.2) scale(1 -1)">
+    <path fill="#14201A" d="M280.25 -12.75Q198.0 -12.75 144.0 27.375Q90.0 67.5 63.375 138.375Q36.75 209.25 36.75 300.75Q36.75 394.5 63.75 464.625Q90.75 534.75 144.875 573.75Q199.0 612.75 280.0 612.75Q344.25 612.75 384.75 587.25Q425.25 561.75 445 522H469V600H605.5V0.0H469V78H445Q425.25 40.5 385.0 13.875Q344.75 -12.75 280.25 -12.75ZM316.5 95.25Q381.0 95.25 419.375 150.875Q457.75 206.5 457.75 300.0Q457.75 394.25 419.375 449.5Q381.0 504.75 316.5 504.75Q257.0 504.75 223.625 452.875Q190.25 401.0 190.25 300.0Q190.25 199.0 223.625 147.125Q257.0 95.25 316.5 95.25Z M730.0 0V600H866.5V509.75H890.5Q906.75 554.75 944.375 584.875Q982.0 615 1049.75 615.0Q1112.5 615.0 1153.875 587.25Q1195.25 559.5 1216.5 509.75H1240.5Q1258.25 556.25 1297.125 585.625Q1336.0 615 1402.25 615.0Q1499.75 615.0 1546.875 551.625Q1594.0 488.25 1594.0 382V0H1445.5V356.0Q1445.5 421.25 1424.25 457.125Q1403.0 493 1355.5 493.0Q1297.5 493.0 1266.875 444.125Q1236.25 395.25 1236.25 323.75V0.0H1087.75V356.0Q1087.75 421.25 1066.5 457.125Q1045.25 493.0 997.75 493.0Q940.5 493.0 909.5 444.125Q878.5 395.25 878.5 323.75V0.0Z M2038.25 -12.75Q1970.75 -12.75 1930.5 13.875Q1890.25 40.5 1870.5 78.0H1846.5V0.0H1710.0V800H1858.5V532.5H1882.5Q1904.0 569.25 1942.0 591.0Q1980.0 612.75 2038.75 612.75Q2117.75 612.75 2171.25 573.75Q2224.75 534.75 2251.75 464.625Q2278.75 394.5 2278.75 300.75Q2278.75 209.25 2252.125 138.375Q2225.5 67.5 2172.25 27.375Q2119.0 -12.75 2038.25 -12.75ZM1999.0 95.25Q2058.5 95.25 2091.875 147.125Q2125.25 199.0 2125.25 300.0Q2125.25 401.0 2091.875 452.875Q2058.5 504.75 1999.0 504.75Q1934.5 504.75 1896.125 449.5Q1857.75 394.25 1857.75 300.0Q1857.75 206.5 1896.125 150.875Q1934.5 95.25 1999.0 95.25Z M2608.25 -15.0Q2468.75 -15.0 2395.75 70.375Q2322.75 155.75 2322.75 300.75Q2322.75 397.75 2355.5 467.875Q2388.25 538.0 2451.5 576.5Q2514.75 615.0 2606.5 615.0Q2737.75 615.0 2807.5 534.25Q2877.25 453.5 2877.25 297.75V264.5H2467.5Q2472.5 185.5 2508.5 138.75Q2544.5 92.0 2608.5 92.0Q2658.0 92 2688.125 121.0Q2718.25 150.0 2728.75 192.0H2869.75Q2859.75 135.5 2829.0 88.625Q2798.25 41.75 2743.75 13.375Q2689.25 -15.0 2608.25 -15.0ZM2467.75 360.5H2732.5Q2728.75 433.25 2696.5 472.875Q2664.25 512.5 2605.5 512.5Q2546.5 512.5 2511.25 474.125Q2476.0 435.75 2467.75 360.5Z M2957.0 0V600H3092.0V492H3116.0Q3122.0 520.75 3138.125 546.875Q3154.25 573.0 3188.0 589.5Q3221.75 606.0 3279.5 606.0H3308.5V471.0H3268.0Q3181.75 471.0 3143.625 427.125Q3105.5 383.25 3105.5 294.0V0.0Z M3662.0 0V600H3810.5V0.0ZM3736.25 672.75Q3696.25 672.75 3675.375 694.125Q3654.5 715.5 3654.5 750.0Q3654.5 784.5 3675.375 805.875Q3696.25 827.25 3736.25 827.25Q3776.5 827.25 3797.25 805.875Q3818.0 784.5 3818.0 750.0Q3818.0 715.5 3797.25 694.125Q3776.5 672.75 3736.25 672.75Z M3935.0 0V600H4071.5V510.0H4095.5Q4113.25 556.25 4151.875 585.625Q4190.5 615.0 4261.5 615.0Q4362.75 615.0 4412.125 551.625Q4461.5 488.25 4461.5 382.0V0.0H4313.0V356Q4313.0 422 4289.5 457.5Q4266.0 493 4213.75 493.0Q4152.0 493 4117.75 444.5Q4083.5 396.0 4083.5 323.75V0.0Z M4823.25 -15.0Q4683.75 -15.0 4610.75 70.375Q4537.75 155.75 4537.75 300.75Q4537.75 397.75 4570.5 467.875Q4603.25 538.0 4666.5 576.5Q4729.75 615.0 4821.5 615.0Q4952.75 615.0 5022.5 534.25Q5092.25 453.5 5092.25 297.75V264.5H4682.5Q4687.5 185.5 4723.5 138.75Q4759.5 92.0 4823.5 92.0Q4873.0 92 4903.125 121.0Q4933.25 150.0 4943.75 192.0H5084.75Q5074.75 135.5 5044.0 88.625Q5013.25 41.75 4958.75 13.375Q4904.25 -15.0 4823.25 -15.0ZM4682.75 360.5H4947.5Q4943.75 433.25 4911.5 472.875Q4879.25 512.5 4820.5 512.5Q4761.5 512.5 4726.25 474.125Q4691.0 435.75 4682.75 360.5Z"/>
+    <rect fill="#E9A23B" x="3383.2" y="0.0" width="210.0" height="800.0" rx="25.2"/>
+  </g>
+</svg>
+</div><p class="cap" style="margin-top:4px">First version, for comparison: the amber l is visibly heavier.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Motion</p><h2>The stem leaves the "a" and becomes the "l".</h2></div>
+      <div class="prose"><p>Because the a's stem and the l are the same width, the logo can animate its own idea: the amber stem flows along the word and lands as the "l". I built three versions in code from the outlined letters.</p></div>
+    </div>
+    <div class="anim">
+      <svg id="logo-svg" role="img" aria-label="Logo animation: the amber stem flows over the word in a rainbow and lands as the l with a bounce."></svg>
+      <div class="anim-foot"><span class="muted" style="font-size:14px">Rainbow version, running live</span><button class="btn btn-ghost btn-sm" type="button" id="replay" style="min-height:40px;padding:0 14px;font-size:14px">Replay</button></div>
+    </div>
+    <div class="versions">
+      <div class="ver"><h3>Slide</h3><p>The stem glides straight along and the letters rise behind it. Calm, best for repeat views.</p></div>
+      <div class="ver"><h3>Arc</h3><p>A quick hop with a crouch and lean. Playful, but busy.</p></div>
+      <div class="ver chosen"><h3>Rainbow</h3><p>The stem bends like a ribbon over the word. An early cut kinked as it landed; the fix was making the final straight taller than the l.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Landing page</p><h2>The bounce means money arrived.</h2></div>
+      <div class="prose">
+        <p>The l's bounce became the brand's one playful gesture, and it only ever happens when money lands. By the end of the page, visitors have learned what it means without being told.</p>
+        <p>The rest of the page follows the same rule: every animation shows the product doing its job. A live card sends, reminds and gets paid; a horizontal scroll carries one invoice from draft to paid; a calculator splits any amount into taxes and take-home.</p>
+      </div>
+    </div>
+    <ol class="moments" id="moments">
+      <li style="--k:0"><i aria-hidden="true"></i><b>Hero</b><span>The first payment lands in the live card.</span></li>
+      <li style="--k:1"><i aria-hidden="true"></i><b>Live card</b><span>Every later payment, with different clients each time.</span></li>
+      <li style="--k:2"><i aria-hidden="true"></i><b>The line</b><span>The invoice reaches "Paid" at the end of the horizontal scroll.</span></li>
+      <li style="--k:3"><i aria-hidden="true"></i><b>Footer</b><span>The page ends on the wordmark settling, with one last bounce.</span></li>
+    </ol>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Product</p><h2>The dashboard answers one question: where's my money?</h2></div>
+      <div class="prose">
+        <p>The home screen leads with what's coming, what's paid, what's in the tax pot and what's overdue, then shows the month as one bar split by the four money states, the same colors as everywhere else.</p>
+        <p>Every action works: send a draft, remind a late client, mark an invoice paid, or create a new one. Each change updates every total, moves 25% into the tax pot, logs the activity, and bounces the logo in the sidebar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head"><div><p class="k2">Craft</p><h2>The details behind it.</h2></div></div>
+    <div class="craft">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><p><b>AA contrast throughout.</b> Bright amber is never used for text; a deep amber handles amber-colored words.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><p><b>Real logo files.</b> Outlined from the font with its kerning, in seven versions with usage rules.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><p><b>Reduced motion respected.</b> Every animation has a finished, still state.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><p><b>Quiet for screen readers.</b> Live demos announce one plain sentence, not every changing number.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><p><b>Light and dark themes.</b> Both follow the visitor's system setting.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><p><b>Honest fine print.</b> The tax calculator says it's an estimate, not advice.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap block rise">
+    <div class="head">
+      <div><p class="k2">Reflection</p><h2>What I'd do next.</h2></div>
+      <div class="prose">
+        <p>This is a concept, so nothing has met real users yet. I'd test the reminder tones with freelancers who chase payments today, and whether "On its way" actually lowers anxiety compared with "Pending".</p>
+        <p>The biggest lesson was the logo: AI tools were great for finding the idea fast, but the real work was rebuilding it precisely from the letterforms, which is what made the motion possible.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="next"><div class="wrap"><div><p style="font-size:14px;margin-bottom:8px">Next project</p><span class="nm">Northvale Expeditions</span></div><p>Guided alpine trips · coming soon</p></div></footer>
+
+<script>
+(function () {
+  var motion = document.documentElement.classList.contains("motion");
+  function once(el, fn, th) {
+    if (!motion) { fn(); return; }
+    new IntersectionObserver(function (e, o) { if (e[0].isIntersecting) { o.disconnect(); fn(); } }, { threshold: th || 0.15 }).observe(el);
+  }
+  document.querySelectorAll(".rise").forEach(function (el) { once(el, function () { el.classList.add("in"); }, 0.08); });
+  ["pals", "types"].forEach(function (id) {
+    var g = document.getElementById(id);
+    once(g, function () { setTimeout(function () { g.classList.add("decided"); }, motion ? 600 : 0); }, 0.4);
+  });
+  var m = document.getElementById("moments");
+  once(m, function () { m.classList.add("in"); }, 0.5);
+
+  var DATA = {"letters": [{"ch": "a", "x": 0, "d": "M276.75 -12.75Q344.25 -12.75 384.5 13.875Q424.75 40.5 444.5 78.0H468.5V0.0H605.0V612.75H456.5V532.5H432.5Q411.25 569.25 373.5 591.0Q335.75 612.75 276.25 612.75Q197.25 612.75 143.75 573.75Q90.25 534.75 63.25 464.625Q36.25 394.5 36.25 300.75Q36.25 209.25 62.875 138.375Q89.5 67.5 142.75 27.375Q196.0 -12.75 276.75 -12.75ZM316.0 95.25Q256.5 95.25 223.125 147.125Q189.75 199.0 189.75 300.0Q189.75 401.0 223.125 452.875Q256.5 504.75 316.0 504.75Q380.5 504.75 418.875 449.5Q457.25 394.25 457.25 300.0Q457.25 206.5 418.875 150.875Q380.5 95.25 316.0 95.25Z", "b": [36.2, -12.8, 605.0, 612.8]}, {"ch": "m", "x": 653.0, "d": "M77 0V600H213.5V509.75H237.5Q253.75 554.75 291.375 584.875Q329 615 396.75 615Q459.5 615 500.875 587.25Q542.25 559.5 563.5 509.75H587.5Q605.25 556.25 644.125 585.625Q683 615 749.25 615Q846.75 615 893.875 551.625Q941 488.25 941 382V0H792.5V356Q792.5 421.25 771.25 457.125Q750 493 702.5 493Q644.5 493 613.875 444.125Q583.25 395.25 583.25 323.75V0H434.75V356Q434.75 421.25 413.5 457.125Q392.25 493 344.75 493Q287.5 493 256.5 444.125Q225.5 395.25 225.5 323.75V0Z", "b": [77.0, 0.0, 941.0, 615.0]}, {"ch": "b", "x": 1633.0, "d": "M405.25 -12.75Q337.75 -12.75 297.5 13.875Q257.25 40.5 237.5 78H213.5V0H77V800H225.5V532.5H249.5Q271 569.25 309.0 591.0Q347 612.75 405.75 612.75Q484.75 612.75 538.25 573.75Q591.75 534.75 618.75 464.625Q645.75 394.5 645.75 300.75Q645.75 209.25 619.125 138.375Q592.5 67.5 539.25 27.375Q486 -12.75 405.25 -12.75ZM366 95.25Q425.5 95.25 458.875 147.125Q492.25 199 492.25 300Q492.25 401 458.875 452.875Q425.5 504.75 366 504.75Q301.5 504.75 263.125 449.5Q224.75 394.25 224.75 300Q224.75 206.5 263.125 150.875Q301.5 95.25 366 95.25Z", "b": [77.0, -12.8, 645.8, 800.0]}, {"ch": "e", "x": 2286.0, "d": "M322.25 -15Q182.75 -15 109.75 70.375Q36.75 155.75 36.75 300.75Q36.75 397.75 69.5 467.875Q102.25 538 165.5 576.5Q228.75 615 320.5 615Q451.75 615 521.5 534.25Q591.25 453.5 591.25 297.75V264.5H181.5Q186.5 185.5 222.5 138.75Q258.5 92 322.5 92Q372 92 402.125 121.0Q432.25 150 442.75 192H583.75Q573.75 135.5 543.0 88.625Q512.25 41.75 457.75 13.375Q403.25 -15 322.25 -15ZM181.75 360.5H446.5Q442.75 433.25 410.5 472.875Q378.25 512.5 319.5 512.5Q260.5 512.5 225.25 474.125Q190 435.75 181.75 360.5Z", "b": [36.8, -15.0, 591.2, 615.0]}, {"ch": "r", "x": 2881.0, "d": "M76 0V600H211V492H235Q241 520.75 257.125 546.875Q273.25 573 307.0 589.5Q340.75 606 398.5 606H427.5V471H387Q300.75 471 262.625 427.125Q224.5 383.25 224.5 294V0Z", "b": [76.0, 0.0, 427.5, 606.0]}, {"ch": "l", "x": 3309.0, "d": "", "b": [75, 0, 223, 800.0]}, {"ch": "i", "x": 3585.0, "d": "M77 0V600H225.5V0ZM151.25 672.75Q111.25 672.75 90.375 694.125Q69.5 715.5 69.5 750.0Q69.5 784.5 90.375 805.875Q111.25 827.25 151.25 827.25Q191.5 827.25 212.25 805.875Q233.0 784.5 233.0 750.0Q233.0 715.5 212.25 694.125Q191.5 672.75 151.25 672.75Z", "b": [69.5, 0.0, 233.0, 827.2]}, {"ch": "n", "x": 3858.0, "d": "M77 0V600H213.5V510H237.5Q255.25 556.25 293.875 585.625Q332.5 615 403.5 615Q504.75 615 554.125 551.625Q603.5 488.25 603.5 382V0H455V356Q455 422 431.5 457.5Q408 493 355.75 493Q294 493 259.75 444.5Q225.5 396 225.5 323.75V0Z", "b": [77.0, 0.0, 603.5, 615.0]}, {"ch": "e", "x": 4501.0, "d": "M322.25 -15Q182.75 -15 109.75 70.375Q36.75 155.75 36.75 300.75Q36.75 397.75 69.5 467.875Q102.25 538 165.5 576.5Q228.75 615 320.5 615Q451.75 615 521.5 534.25Q591.25 453.5 591.25 297.75V264.5H181.5Q186.5 185.5 222.5 138.75Q258.5 92 322.5 92Q372 92 402.125 121.0Q432.25 150 442.75 192H583.75Q573.75 135.5 543.0 88.625Q512.25 41.75 457.75 13.375Q403.25 -15 322.25 -15ZM181.75 360.5H446.5Q442.75 433.25 410.5 472.875Q378.25 512.5 319.5 512.5Q260.5 512.5 225.25 474.125Q190 435.75 181.75 360.5Z", "b": [36.8, -15.0, 591.2, 615.0]}]};
+  var NS = "http://www.w3.org/2000/svg";
+  var L = DATA.letters;
+  var STEM_W = 148, XH = 612.75, ASC = 800; // font units: the a and l stems are the same width
+  var A_STEM_X = 458;                          // left edge of the a's stem, inside the a
+  var inkL = L[0].x + L[0].b[0], inkR = L[8].x + L[8].b[2];
+  var PADX = 520, W = (inkR - inkL) + PADX * 2, H = Math.round(W * 0.5);
+  var X0 = PADX - inkL, BASE = H / 2 + ASC / 2;  // word centered in the frame
+
+  var svg = document.getElementById("logo-svg");
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  var cam = document.createElementNS(NS, "g");
+  svg.appendChild(cam);
+
+  // letters
+  var rise = [];
+  L.forEach(function (g, i) {
+    if (i === 5) { rise.push(null); return; }          // the l is the amber bar
+    var outer = document.createElementNS(NS, "g");
+    outer.setAttribute("transform", "translate(" + (X0 + g.x) + " " + BASE + ")");
+    var inner = document.createElementNS(NS, "g");
+    var p = document.createElementNS(NS, "path");
+    p.setAttribute("d", g.d);
+    p.setAttribute("class", "ink");
+    p.setAttribute("transform", "scale(1 -1)");
+    inner.appendChild(p); outer.appendChild(inner); cam.appendChild(outer);
+    rise.push(inner);
+  });
+  var bar = document.createElementNS(NS, "rect");
+  bar.setAttribute("class", "bar");
+  cam.appendChild(bar);
+  var body = document.createElementNS(NS, "path");   // the bar while it flows: bends along the track
+  body.setAttribute("fill", "none");
+  body.setAttribute("stroke", "#E9A23B");
+  body.setAttribute("stroke-linejoin", "round");
+  body.setAttribute("stroke-linecap", "butt");
+  cam.appendChild(body);
+
+  // geometry
+  var barStartX = X0 + L[0].x + A_STEM_X;
+  var barEndX = X0 + L[5].x + L[5].b[0];
+  var monoCx = X0 + L[0].x + (L[0].b[0] + L[0].b[2]) / 2, monoCy = BASE - XH / 2;
+  var S0 = (H * 0.58) / XH;
+  var T0x = W / 2 - S0 * monoCx, T0y = H / 2 - S0 * monoCy;
+
+  // easing
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function seg(t, a, b) { return clamp((t - a) / (b - a)); }
+  function inOut(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function out(x) { return 1 - Math.pow(1 - x, 3); }
+  function outBack(x) { var c = 1.4; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  // timeline (ms)
+  var T_CAM = [700, 1700], T_CROUCH = [1700, 1980], T_SLIDE = [1980, 3780], T_BOUNCE = [3780, 4880], END = 4880;
+  var LEG = 840, RY = 820; // the track: straight up LEG, a rainbow of height RY, straight down LEG.
+  // LEG is taller than the l (800), so the l is fully on the straight part before it stops.
+  var RISE_MS = 420, RISE_DY = 300;
+
+  // The track the bar flows along: straight up out of the a's stem, over a rainbow,
+  // straight down into the l. The bar is a segment of this track that slides forward,
+  // so it bends to follow the curve and straightens again at both ends.
+  var CXs = barStartX + STEM_W / 2, CXe = barEndX + STEM_W / 2;
+  var RCX = (CXs + CXe) / 2, RX = (CXe - CXs) / 2;
+  // The rainbow is a cubic curve whose ends leave and meet the straight legs vertically
+  // with very little curvature, so the bar eases into and out of the bend instead of kinking.
+  var TOP = BASE - LEG, K = RY / 0.75;
+  var N = 800, P = [], arcLen = [0];
+  for (var k = 0; k <= N; k++) {
+    var u = k / N, v = 1 - u;
+    var bx = v * v * v * CXs + 3 * v * v * u * CXs + 3 * v * u * u * CXe + u * u * u * CXe;
+    var by = v * v * v * TOP + 3 * v * v * u * (TOP - K) + 3 * v * u * u * (TOP - K) + u * u * u * TOP;
+    P.push([bx, by]);
+    if (k) arcLen.push(arcLen[k - 1] + Math.hypot(bx - P[k - 1][0], by - P[k - 1][1]));
+  }
+  var ARCL = arcLen[N], TOTAL = LEG + ARCL + LEG;
+  function track(sp) {
+    if (sp <= LEG) return [CXs, BASE - sp];
+    if (sp >= LEG + ARCL) return [CXe, TOP + (sp - LEG - ARCL)];
+    var d = sp - LEG, lo = 0, hi = N;
+    while (hi - lo > 1) { var m = (lo + hi) >> 1; if (arcLen[m] < d) lo = m; else hi = m; }
+    var f = (d - arcLen[lo]) / (arcLen[hi] - arcLen[lo] || 1);
+    return [lerp(P[lo][0], P[hi][0], f), lerp(P[lo][1], P[hi][1], f)];
+  }
+  function barLen(t) { return lerp(XH, ASC, out(seg(t, T_SLIDE[0] + 300, T_SLIDE[1] - 200))); }
+  function headAt(t) { var fp = inOut(seg(t, T_SLIDE[0], T_SLIDE[1])); return lerp(XH, TOTAL, fp); }
+  function timeWhen(test) {           // first time in the flight when test(head position) is true
+    var lo = T_SLIDE[0], hi = T_SLIDE[1];
+    for (var k = 0; k < 30; k++) { var m = (lo + hi) / 2; if (test(track(headAt(m)))) hi = m; else lo = m; }
+    return hi;
+  }
+  // m, b, e, r rise as the bar's head flows over them; i, n, e as it comes down
+  var appear = [];
+  L.forEach(function (g, i) {
+    if (i >= 1 && i <= 4) {
+      var cxL = X0 + g.x + (g.b[0] + g.b[2]) / 2;
+      appear[i] = timeWhen(function (pt) { return pt[0] >= cxL; }) - 100;
+    }
+  });
+  var tDown = timeWhen(function (pt) { return pt[0] >= CXe - 1; });
+  appear[6] = tDown - 150; appear[7] = tDown - 30; appear[8] = tDown + 90;
+
+  // bounce keyframes: [time 0–1, lift (font units, up), scaleX, scaleY]
+  var KF = [[0, 0, 1, 1], [.12, 0, 1.1, .88], [.34, 170, .94, 1.08], [.52, 0, 1.08, .9], [.66, 50, .98, 1.03], [.8, 0, 1.03, .97], [1, 0, 1, 1]];
+  function bounce(x) {
+    for (var i = 1; i < KF.length; i++) {
+      if (x <= KF[i][0]) {
+        var a = KF[i - 1], b = KF[i], u = (x - a[0]) / (b[0] - a[0]);
+        u = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+        return [lerp(a[1], b[1], u), lerp(a[2], b[2], u), lerp(a[3], b[3], u)];
+      }
+    }
+    return [0, 1, 1];
+  }
+
+  function render(t) {
+    // camera: monogram scale → word scale
+    var c = inOut(seg(t, T_CAM[0], T_CAM[1]));
+    var s = lerp(S0, 1, c);
+    cam.setAttribute("transform", "translate(" + lerp(T0x, 0, c) + " " + lerp(T0y, 0, c) + ") scale(" + s + ")");
+
+    // letters
+    rise.forEach(function (g, i) {
+      if (!g) return;
+      if (i === 0) { g.removeAttribute("transform"); g.style.opacity = 1; return; }
+      var p = out(seg(t, appear[i], appear[i] + RISE_MS));
+      var y = (1 - outBack(seg(t, appear[i], appear[i] + RISE_MS))) * RISE_DY;
+      g.setAttribute("transform", "translate(0 " + y.toFixed(1) + ")");
+      g.style.opacity = p;
+    });
+
+    // the amber bar: crouch, flow along the rainbow track, land, bounce
+    var crouch = seg(t, T_CROUCH[0], T_CROUCH[1]);
+    var cr = Math.sin(Math.PI * crouch);
+    var fp = seg(t, T_SLIDE[0], T_SLIDE[1]);
+    var flowing = fp > 0 && fp < 1;
+    bar.style.display = flowing ? "none" : "";
+    body.style.display = flowing ? "" : "none";
+
+    if (flowing) {
+      var head = headAt(t), len = barLen(t), tail = Math.max(0, head - len);
+      var pts = [], steps = 96;
+      for (var k = 0; k <= steps; k++) {
+        var pt = track(tail + (head - tail) * k / steps);
+        pts.push((k ? "L" : "M") + pt[0].toFixed(1) + " " + pt[1].toFixed(1));
+      }
+      body.setAttribute("d", pts.join(" "));
+      body.setAttribute("stroke-width", STEM_W);
+    } else {
+      var done = fp >= 1;
+      var h = done ? ASC : XH;
+      var b = bounce(seg(t, T_BOUNCE[0], T_BOUNCE[1]));
+      var sx = b[1] * (1 + .12 * cr), sy = b[2] * (1 - .16 * cr);
+      var w = STEM_W * sx, hh = h * sy;
+      var cx = done ? CXe : CXs;
+      bar.setAttribute("x", (cx - w / 2).toFixed(1));
+      bar.setAttribute("y", (BASE - b[0] - hh).toFixed(1));
+      bar.setAttribute("width", w.toFixed(1));
+      bar.setAttribute("height", hh.toFixed(1));
+      bar.removeAttribute("transform");
+      bar.setAttribute("rx", done ? "15" : "0");
+    }
+  }
+
+
+  /* play the logo animation when it scrolls into view; Replay plays it again */
+  var raf = 0, start = 0;
+  function play() {
+    cancelAnimationFrame(raf);
+    start = performance.now();
+    (function frame(now) { var t = now - start; render(Math.min(t, END)); if (t < END) raf = requestAnimationFrame(frame); })(start);
+  }
+  document.getElementById("replay").addEventListener("click", play);
+  if (!motion) render(END);
+  else { render(0); once(document.getElementById("logo-svg"), function () { setTimeout(play, 300); }, 0.6); }
+})();
+</script>
+</body>
+</html>

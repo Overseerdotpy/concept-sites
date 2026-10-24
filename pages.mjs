@@ -1,0 +1,22 @@
+// Every page in the site, with what each one is. Tests loop over this list.
+export const PAGES = [
+  { path: '/', name: 'hub' },
+  { path: '/obsidra/', name: 'obsidra landing', project: 'obsidra' },
+  { path: '/obsidra/dashboard/', name: 'obsidra dashboard', project: 'obsidra', app: true },
+  { path: '/obsidra/case-study/', name: 'obsidra case study', project: 'obsidra' },
+  { path: '/amberline/', name: 'amberline landing', project: 'amberline' },
+  { path: '/amberline/app/', name: 'amberline app', project: 'amberline', app: true },
+  { path: '/amberline/logo/', name: 'amberline logo', project: 'amberline' },
+  { path: '/amberline/case-study/', name: 'amberline case study', project: 'amberline' },
+  { path: '/northvale/', name: 'northvale combined page', project: 'northvale', shell: true },
+  { path: '/northvale/standalone/', name: 'northvale standalone file', project: 'northvale', standalone: true },
+  { path: '/northvale/site/', name: 'northvale website', project: 'northvale' },
+  { path: '/northvale/book/', name: 'northvale booking', project: 'northvale', app: true },
+  { path: '/northvale/trip/', name: 'northvale trip page', project: 'northvale', app: true },
+  { path: '/northvale/case-study/', name: 'northvale case study', project: 'northvale' },
+  { path: '/northvale/brand/system/', name: 'northvale brand system', project: 'northvale' },
+  { path: '/northvale/brand/logo/', name: 'northvale logo', project: 'northvale' },
+  { path: '/northvale/brand/motion/', name: 'northvale logo animation', project: 'northvale' },
+  { path: '/northvale/brand/type/', name: 'northvale type directions', project: 'northvale' },
+  { path: '/northvale/brand/palette/', name: 'northvale palette directions', project: 'northvale' },
+];
