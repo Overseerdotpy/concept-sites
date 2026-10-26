@@ -4,7 +4,7 @@ test('the hub lists every project and each link opens the right page', async ({ 
   await page.goto('/');
   const expected = [
     ['Landing page', 'obsidra/', /Obsidra/], ['Dashboard', 'obsidra/dashboard/', /h100-07/], ['Case study', 'obsidra/case-study/', /Obsidra case study/],
-    ['Landing page', 'amberline/', /Amberline/], ['App home', 'amberline/app/', /Home · Amberline/], ['Logo guidelines', 'amberline/logo/', /logo/i], ['Case study', 'amberline/case-study/', /Amberline case study/],    ['Open the project', 'northvale/', /Northvale Expeditions/], ['Website', 'northvale/site/', /Northvale Expeditions — guided alpine trips/], ['Book a trip', 'northvale/book/', /Book your trip/], ['Case study', 'northvale/case-study/', /Northvale Expeditions case study/],
+    ['Landing page', 'amberline/', /Amberline/], ['App home', 'amberline/app/', /Home · Amberline/], ['Logo guidelines', 'amberline/logo/', /logo/i], ['Case study', 'amberline/case-study/', /Amberline case study/],    ['Open the project', 'northvale/', /Northvale Expeditions/], ['Website', 'northvale/site/', /Northvale Expeditions — guided alpine trips/], ['Book a trip', 'northvale/book/', /Book your trip/], ['Case study', 'northvale/case-study/', /Northvale Expeditions case study/], ['Single file', 'northvale/standalone/', /Northvale · Landing page/],
   ];
   for (const [label, href, title] of expected) {
     const link = page.locator(`.card a[href="${href}"]`);

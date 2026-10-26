@@ -258,10 +258,9 @@ test.describe('the light beam footer (re-created from the 21st.dev "Light Beam F
     expect(colours).toHaveLength(3);
     expect(new Set(colours).size, 'each label has its own accent colour').toBe(3);
     await expect(page.locator('#footer a[href="https://github.com/Overseerdotpy/concept-sites"]')).toHaveCount(1);
-    await expect(page.locator('#footer .lb-in a.l[href^="mailto:"]')).toHaveAttribute('href', 'mailto:ashlundg1@gmail.com');
-    await page.locator('#footer a[data-brand="logo"]').click();
+    await page.locator('#footer a[data-brand="system"]').click();
     await expect(selected(page)).toHaveText('Brand');
-    await expect(page.locator('button[data-brand="logo"]')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('button[data-brand="system"]')).toHaveAttribute('aria-pressed', 'true');
     expect(await page.evaluate(() => scrollY), 'footer links return you to the top').toBeLessThan(5);
   });
 
@@ -339,5 +338,184 @@ test.describe('the light beam footer (re-created from the 21st.dev "Light Beam F
     await page.mouse.move(box.x + box.width * 0.5, box.y + box.height * 0.5);
     await page.waitForTimeout(300);
     expect(await foot.evaluate((e) => e.style.getPropertyValue('--g'))).toBe('');
+  });
+});
+
+
+test.describe('one footer, not two', () => {
+  const visibleFooters = (scope) => scope.evaluate(() => [...document.querySelectorAll('footer')].filter((f) => f.offsetWidth || f.offsetHeight).length);
+  const frameOf = (page, re) => page.frames().find((f) => re.test(f.url()));
+
+  test('inside the combined page every tab shows only the animated footer', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/northvale/');
+    const views = [['website', /northvale\/site\//], ['book', /northvale\/book\//], ['trip', /northvale\/trip\//], ['case-study', /northvale\/case-study\//]];
+    for (const [id, re] of views) {
+      await page.locator(`#t-${id}`).click();
+      await expect.poll(() => !!frameOf(page, re)).toBe(true);
+      expect(await visibleFooters(frameOf(page, re)), `${id}: the page's own footer is hidden`).toBe(0);
+      expect(await visibleFooters(page), `${id}: exactly one footer on the combined page`).toBe(1);
+    }
+    for (const key of ['system', 'logo']) {
+      await page.locator('#t-brand').click();
+      await page.locator(`button[data-brand="${key}"]`).click();
+      await expect.poll(() => !!frameOf(page, new RegExp(`brand/${key}/`))).toBe(true);
+      expect(await visibleFooters(frameOf(page, new RegExp(`brand/${key}/`))), `brand ${key}`).toBe(0);
+    }
+  });
+
+  test('on their own, the pages keep their footers', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    for (const path of ['/northvale/site/', '/northvale/case-study/', '/northvale/brand/system/', '/northvale/brand/logo/']) {
+      await page.goto(path);
+      expect(await visibleFooters(page), path).toBe(1);
+    }
+  });
+
+  test('the website\'s "About" link scrolls to the footer instead of going nowhere', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/northvale/');
+    await frame(page, 'website').locator('a[href="#about"]').first().click();
+    await expect(page.locator('#footer')).toBeInViewport();
+    await expect(selected(page)).toHaveText('Website');
+  });
+
+  test('the footer carries the website\'s own sentence and links, and each link lands on its section', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/northvale/#case-study');
+    await expect(page.locator('#footer')).toContainText('guides small groups into the high Alps, from the valley to the summit and safely home again');
+    const labels = await page.$$eval('#footer .lb-in nav a.l', (as) => as.map((a) => a.textContent.trim()));
+    for (const l of ['Hut-to-hut trek', 'First glacier crossing', 'Your first summit', 'Am I ready?', 'The route', 'Our guides']) expect(labels).toContain(l);
+    for (const [link, id] of [['Our guides', 'guides'], ['The route', 'route'], ['Your first summit', 'trip-summit']]) {
+      await page.locator('#footer a.l', { hasText: link }).click();
+      await expect(selected(page), link).toHaveText('Website');
+      const site = page.frames().find((f) => /northvale\/site\//.test(f.url()));
+      await expect.poll(() => site.evaluate((i) => { const r = document.getElementById(i).getBoundingClientRect(); return r.top > -40 && r.top < innerHeight * 0.6; }, id), { message: `${link} scrolls its section into view` }).toBe(true);
+      await page.locator('#t-case-study').click();
+    }
+  });
+
+  test('the website\'s own Contact link now goes to email (it used to point at nothing)', async ({ page }) => {
+    await page.goto('/northvale/site/');
+    await expect(page.locator('footer a', { hasText: 'Contact' })).toHaveAttribute('href', 'mailto:ashlundg1@gmail.com');
+  });
+});
+
+// Northvale has no server. These tests prove the browser does everything a backend would, correctly,
+// and that nothing leaves the browser.
+test.describe('behind the scenes: everything runs in the browser, and it all works', () => {
+  test.beforeEach(async ({ page }) => { await page.emulateMedia({ reducedMotion: 'reduce' }); });
+  const fillTravellers = async (page, n = 1) => {
+    for (let i = 0; i < n; i++) await page.locator(`#nm${i}`).fill(['Ash Gibson', 'Sam Rivera'][i]);
+    await page.locator('#email').fill('ash@example.com');
+  };
+
+  test('a whole booking sends nothing anywhere: no requests except the page, its fonts and its own files', async ({ page }) => {
+    const seen = [];
+    page.on('request', (r) => seen.push({ method: r.method(), host: new URL(r.url()).host }));
+    await page.goto('/northvale/book/#glacier%7C5%20Jul');
+    await completeBooking(page);
+    await page.locator('#to-trip').click();
+    await expect(page.locator('h1')).toHaveText(/first glacier crossing/i);
+    expect(seen.filter((r) => r.method !== 'GET'), 'nothing is posted').toEqual([]);
+    const outside = [...new Set(seen.map((r) => r.host).filter((h) => h !== '127.0.0.1:4173' && !/^fonts\.(googleapis|gstatic)\.com$/.test(h)))];
+    expect(outside, 'no calls to any other server').toEqual([]);
+  });
+
+  test('a full departure sends you to a waitlist, validates the email, and offers no trip page', async ({ page }) => {
+    await page.goto('/northvale/book/#summit%7C2%20Aug');
+    await expect(page.locator('#s-dep')).toContainText('Full');
+    await expect(page.locator('#wait-note')).toContainText('This date is full');
+    await expect(page.locator('#n1')).toHaveText('Join the waitlist');
+    await page.locator('#n1').click();
+    await expect(page.locator('[id$="-err"]:visible')).toHaveText("Enter your email so we can tell you when a seat opens.");
+    await page.locator('#wemail').fill('nope');
+    await page.locator('#n1').click();
+    await expect(page.locator('[id$="-err"]:visible')).toContainText("doesn't look like an email address");
+    await page.locator('#wemail').fill('ash@example.com');
+    await page.locator('#n1').click();
+    await expect(page.locator('#s6')).toHaveText(/on the waitlist/i);
+    await expect(page.locator('#done-sub')).toContainText('ash@example.com');
+    await expect(page.locator('#to-trip'), 'a waitlisted visitor has no trip to go to').toBeHidden();   // regression: the button used to stay visible
+  });
+
+  test('seats are limited, and the price, deposit and balance add up', async ({ page }) => {
+    await page.goto('/northvale/book/#glacier%7C5%20Jul');
+    await page.locator('#n1').click();
+    await expect(page.locator('#seat-note')).toHaveText('Up to 2 on this date');
+    await page.locator('#plus').click();
+    await expect(page.locator('#count')).toHaveText('2');
+    await expect(page.locator('#plus'), 'no third traveller on a 2-seat date').toBeDisabled();
+    await expect(page.locator('#names input')).toHaveCount(2);
+    await expect(page.locator('#s-trip-total')).toHaveText('$3,780');                // 2 x $1,890
+    await expect(page.locator('#s-deposit')).toHaveText('$756');                     // 20%
+    await expect(page.locator('#s-balance')).toContainText('$3,024 due 6 May 2027'); // the rest, 60 days before
+    await page.locator('#minus').click();
+    await expect(page.locator('#s-trip-total')).toHaveText('$1,890');
+    await expect(page.locator('#s-deposit')).toHaveText('$378');
+  });
+
+  test('renting kit adds $95 a time, and needs a boot size before you can pay', async ({ page }) => {
+    await page.goto('/northvale/book/#glacier%7C5%20Jul');
+    await page.locator('#n1').click(); await fillTravellers(page); await page.locator('#n2').click();
+    for (const yes of await page.locator('button:visible', { hasText: /^Yes/ }).all()) await yes.click();
+    await page.locator('#n3').click();
+    await page.locator('input[role="switch"]').first().check({ force: true });
+    await expect(page.locator('#s-rent-line')).toContainText('× 1');
+    await expect(page.locator('#s-rent-total')).toHaveText('$95');
+    await expect(page.locator('#s-total')).toHaveText('$1,985');                     // $1,890 + $95
+    await page.locator('#n4').click();
+    await expect(page.locator('#boots-err')).toHaveText('Choose a boot size so your guide can fit the crampons.');
+    await page.locator('#boots').selectOption({ index: 1 });
+    await page.locator('#n4').click();
+    await expect(page.locator('#pay')).toBeVisible();
+  });
+
+  test('the card form says exactly what is wrong, and says it is a demo', async ({ page }) => {
+    await page.goto('/northvale/book/#glacier%7C5%20Jul');
+    await page.locator('#n1').click(); await fillTravellers(page); await page.locator('#n2').click();
+    for (const yes of await page.locator('button:visible', { hasText: /^Yes/ }).all()) await yes.click();
+    await page.locator('#n3').click(); await page.locator('#n4').click();
+    await expect(page.locator('p.demo', { hasText: 'nothing is charged' })).toBeVisible();
+    await page.locator('#pay').click();
+    await expect(page.locator('#cname-err')).toHaveText('Enter the name shown on the card.');
+    await expect(page.locator('#cnum-err')).toHaveText("Card numbers here are 16 digits. You've entered 0.");
+    await expect(page.locator('#cexp-err')).toHaveText('Enter the expiry date.');
+    await expect(page.locator('#ccvc-err')).toHaveText('Enter the 3 or 4 digits on the back of the card.');
+    await page.locator('#cname').fill('Ash'); await page.locator('#cnum').fill('4242 4242 4242 424');
+    await page.locator('#cexp').fill('01/20'); await page.locator('#ccvc').fill('12');
+    await page.locator('#pay').click();
+    await expect(page.locator('#cnum-err')).toHaveText("Card numbers here are 16 digits. You've entered 15.");
+    await expect(page.locator('#cexp-err')).toHaveText('Use a future date in MM/YY format, like 08/29.');
+    await expect(page.locator('#ccvc-err')).toHaveText('Enter the 3 or 4 digits on the back of the card.');
+  });
+
+  test('trip checklist and packing progress are saved in the browser, per booking', async ({ page }) => {
+    await page.goto('/northvale/trip/');
+    await expect(page.locator('#todo-prog')).toHaveText('0 of 5 done');
+    await expect(page.locator('#pack-prog')).toHaveText('0 of 14 packed');
+    await page.locator('label[for="tk-fitness"]').click();
+    await page.locator('label[for="pk-0-0"]').click();
+    await expect(page.locator('#todo-prog')).toHaveText('1 of 5 done');
+    await expect(page.locator('#pack-prog')).toHaveText('1 of 14 packed');
+    const keys = await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith('nv-trip-')));
+    expect(keys, 'one saved record, named for the booking').toEqual(['nv-trip-NV-2027-4821']);
+    await page.reload();
+    await expect(page.locator('#tk-fitness')).toBeChecked();
+    await expect(page.locator('#todo-prog'), 'still there after a reload').toHaveText('1 of 5 done');
+    await expect(page.locator('#pack-prog')).toHaveText('1 of 14 packed');
+    await page.locator('label[for="tk-fitness"]').click();
+    await expect(page.locator('#todo-prog')).toHaveText('0 of 5 done');             // and it can be undone
+  });
+
+  test('a new booking starts with its own empty checklist', async ({ page }) => {
+    await page.goto('/northvale/trip/');
+    await page.locator('label[for="tk-fitness"]').click();
+    await expect(page.locator('#todo-prog')).toHaveText('1 of 5 done');
+    await page.goto('/northvale/book/#trek%7C14%20Jun');
+    const ref = await completeBooking(page);
+    await page.locator('#to-trip').click();
+    await expect(page.locator('body')).toContainText(ref);
+    await expect(page.locator('#todo-prog'), 'not carried over from another booking').toHaveText('0 of 5 done');
   });
 });

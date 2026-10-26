@@ -9,7 +9,7 @@ import lighthouse from 'lighthouse';
 import * as chromeLauncher from 'chrome-launcher';
 
 const ALL = ['/', '/obsidra/', '/obsidra/dashboard/', '/obsidra/case-study/', '/amberline/', '/amberline/app/', '/amberline/logo/', '/amberline/case-study/',
-  '/northvale/', '/northvale/site/', '/northvale/book/', '/northvale/trip/', '/northvale/case-study/', '/northvale/brand/system/', '/northvale/brand/logo/', '/northvale/brand/motion/', '/northvale/brand/type/', '/northvale/brand/palette/'];
+  '/northvale/', '/northvale/standalone/', '/northvale/site/', '/northvale/book/', '/northvale/trip/', '/northvale/case-study/', '/northvale/brand/system/', '/northvale/brand/logo/', '/northvale/brand/motion/', '/northvale/brand/type/', '/northvale/brand/palette/'];
 const form = ['mobile', 'desktop', 'both'].includes(process.argv[2]) ? process.argv[2] : 'both';
 const pages = process.argv.slice(process.argv[2] && ['mobile', 'desktop', 'both'].includes(process.argv[2]) ? 3 : 2);
 const targets = pages.length ? pages : ALL;
