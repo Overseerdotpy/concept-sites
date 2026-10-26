@@ -9,6 +9,7 @@ export const PAGES = [
   { path: '/amberline/logo/', name: 'amberline logo', project: 'amberline' },
   { path: '/amberline/case-study/', name: 'amberline case study', project: 'amberline' },
   { path: '/northvale/', name: 'northvale combined page', project: 'northvale', shell: true },
+  { path: '/northvale/standalone/', name: 'northvale standalone file', project: 'northvale', standalone: true },
   { path: '/northvale/site/', name: 'northvale website', project: 'northvale' },
   { path: '/northvale/book/', name: 'northvale booking', project: 'northvale', app: true },
   { path: '/northvale/trip/', name: 'northvale trip page', project: 'northvale', app: true },

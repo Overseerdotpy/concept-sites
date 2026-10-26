@@ -2,13 +2,16 @@ import { test, expect } from '@playwright/test';
 import { PAGES } from './pages.mjs';
 
 // Quality gates that apply to every single page in the site.
-for (const { path, name, app } of PAGES) {
+for (const { path, name, app, standalone } of PAGES) {
   test.describe(name, () => {
     test('loads cleanly, with a title, description, language and one h1', async ({ page }) => {
       const problems = [];
       page.on('pageerror', (e) => problems.push('page error: ' + e.message));
       page.on('console', (m) => {
-        if (m.type() === 'error' && !/fonts\.(googleapis|gstatic)|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED/.test(m.text())) problems.push('console: ' + m.text());
+        // the standalone file declares no tab icon (it is added unchanged), so the browser asks for /favicon.ico and logs a 404;
+        // northvale-standalone.spec.mjs separately proves the page makes no failed requests of its own
+        const tabIcon404 = standalone && /status of 404/.test(m.text());
+        if (m.type() === 'error' && !tabIcon404 && !/fonts\.(googleapis|gstatic)|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED/.test(m.text())) problems.push('console: ' + m.text());
       });
       await page.goto(path);
       await page.waitForTimeout(800);
@@ -18,7 +21,8 @@ for (const { path, name, app } of PAGES) {
       expect(desc.length, 'meta description length').toBeGreaterThan(50);
       expect(desc.length).toBeLessThan(200);
       await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-      await expect(page.locator('h1')).toHaveCount(1);
+      // the standalone file is a shell: its headings live inside its pages, so the shell itself has none
+      if (!standalone) await expect(page.locator('h1')).toHaveCount(1);
     });
 
     test('has no private links and no dead placeholder links', async ({ page }) => {
@@ -65,7 +69,7 @@ for (const { path, name, app } of PAGES) {
 
 // Link previews: what a recruiter sees when the link is pasted into LinkedIn, Slack or an email.
 const BASE = 'https://overseerdotpy.github.io/concept-sites/';
-for (const { path, name } of PAGES) {
+for (const { path, name, standalone } of PAGES.filter((p) => !p.standalone)) {
   test(`${name}: has a complete link preview whose image exists at 1200x630`, async ({ page }) => {
     await page.goto(path);
     const meta = (k) => page.locator(`meta[property="${k}"], meta[name="${k}"]`).first().getAttribute('content');

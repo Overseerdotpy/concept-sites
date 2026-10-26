@@ -42,7 +42,26 @@ Nine existing pages plus one new page, the combined page at `site/northvale/inde
 | Booking | `aria-level="2"` on the summary heading. | It was an `h3` straight after the `h1`, which broke the heading outline. Looks identical. |
 | Trip page | The home link goes to `../site/`. | Private link. |
 | Case study | Its four buttons go to the pages in this repo (or switch tabs); the top bar (Ash, Work, About, Contact) goes to the hub, GitHub and email and opens outside the frame. | Private links and dead `#` links. |
+| Website, case study, brand system and logo pages | Their own footers are hidden when the page is shown inside the combined page, and show as usual when it is opened on its own. | The combined page has one footer, the animated one. The website's footer content (its sentence about the guides and its section links) was moved into that footer, so nothing is lost. |
+| Website | "About" links scroll to the combined page's footer when framed. The footer's "Contact" link now goes to email. | "Contact" pointed at `#contact`, which does not exist on the page. |
+| Booking | `[hidden]{display:none!important}` | The page hides "Go to your trip" on the waitlist screen with the `hidden` attribute, but the button's style forced it back on, so a waitlisted visitor saw a button to a trip they don't have. |
 | Brand pages (5) | Metadata only. | None needed. |
+
+## Northvale single file (`site/northvale/standalone/index.html`)
+Added to the repository exactly as delivered: byte for byte, with no edits to make it fit. The tests adapt to it instead. Its own tab bar page has no `h1` (its headings live inside its pages) and no link-preview tags, so the two checks that need those skip it.
+
+The file is the version you uploaded, with these changes made before it was added:
+
+| Change | Why |
+| --- | --- |
+| The static footers on the landing page, case study, brand system and logo pages were replaced by the light beam footer. The website footer's sentence and section links, and the brand pages' captions, moved into it. | You asked for one footer, the animated one. |
+| The case study's "Next project: Saffron Loom Co. · coming soon" teaser was removed. | It pointed at a project that does not exist. |
+| The waitlist screen no longer shows "Go to your trip". | The page hid it with the `hidden` attribute, but the button's style overrode that. |
+| Switching tabs no longer moves keyboard focus into the page. | Three presses of ArrowRight used to go Booking, Booking, Booking. |
+| Back and Forward walk through the tabs (history entries instead of replacing the address). | Back used to leave the whole project. |
+| The shell only accepts messages from its own pages. | It used to act on a message from any window. |
+| The embedded logo provenance data was removed (seven blocks, about 60 KB). | It leaked into the case study's heading text. |
+| GSAP and ScrollTrigger are inside the file instead of loaded from a CDN. | Offline or on a restricted network the title letters' scroll animation did not run. |
 
 ## Design notes (left as designed)
 - **Obsidra dashboard, "Pause".** It pauses the log feed only; the billing clock keeps running, which is correct for a billing product. The button just says "Pause" beside "Stop cluster", so it can read as pausing the meter. "Pause log" would remove the ambiguity.
